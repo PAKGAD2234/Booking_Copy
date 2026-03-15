@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEETWO Thai Massage – จองคิว</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown: #6b4c45;
+    --brown-light: #9a7065;
+    --brown-pale: #c9a99e;
+    --cream: #fdf8f5;
+    --cream-mid: #f5ede7;
+    --cream-dark: #ecddd6;
+    --text: #3d2a26;
+    --text-soft: #7a5c57;
+    --border: #dcc8c2;
+    --white: #ffffff;
+    --shadow: 0 4px 32px rgba(107,76,69,0.10);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Sarabun', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
+
+  header {
+    background: var(--white); border-bottom: 1px solid var(--cream-dark);
+    padding: 18px 20px 14px; text-align: center;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(107,76,69,0.07);
+  }
+  .logo-wrap { display: flex; align-items: center; justify-content: center; gap: 14px; }
+  .logo-img { width: 60px; height: 60px; object-fit: contain; }
+  .logo-text h1 {
+    font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600;
+    color: var(--brown); letter-spacing: 3px; line-height: 1;
+  }
+  .logo-text p {
+    font-size: 10px; font-weight: 500; color: var(--brown-light);
+    letter-spacing: 3.5px; text-transform: uppercase; margin-top: 4px;
+  }
+
+  main { max-width: 560px; margin: 0 auto; padding: 28px 16px 60px; }
+  .page-title { text-align: center; margin-bottom: 24px; }
+  .page-title h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500;
+    color: var(--brown); letter-spacing: 1px;
+  }
+  .page-title p { font-size: 13px; color: var(--text-soft); margin-top: 5px; }
+
+  .card {
+    background: var(--white); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 24px 20px;
+    margin-bottom: 16px; border: 1px solid var(--cream-dark);
+  }
+  .section-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--brown-pale); margin-bottom: 18px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--cream-dark); }
+
+  .field { margin-bottom: 16px; }
+  .field:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 13px; font-weight: 500; color: var(--text-soft); margin-bottom: 7px; }
+  label span.req { color: var(--brown-pale); margin-left: 3px; }
+
+  input, select, textarea {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: 'Sarabun', sans-serif; font-size: 15px;
+    color: var(--text); background: var(--cream);
+    transition: border-color .2s, box-shadow .2s, background .2s;
+    appearance: none; -webkit-appearance: none; outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--brown-light); background: var(--white);
+    box-shadow: 0 0 0 3px rgba(107,76,69,0.08);
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a7065' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center;
+    padding-right: 38px; cursor: pointer;
+  }
+  textarea { resize: vertical; min-height: 72px; line-height: 1.6; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* Count */
+  .person-count-row { display: flex; align-items: center; gap: 12px; }
+  .count-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1.5px solid var(--border); background: var(--cream);
+    color: var(--brown); font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s; flex-shrink: 0;
+  }
+  .count-btn:hover { border-color: var(--brown-pale); background: var(--cream-dark); }
+  .count-display {
+    font-size: 22px; font-weight: 600; color: var(--brown);
+    min-width: 28px; text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .count-label { font-size: 14px; color: var(--text-soft); }
+
+  /* Person cards */
+  .person-card {
+    background: var(--white); border: 1px solid var(--cream-dark);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 20px 18px; margin-bottom: 12px;
+    animation: fadeUp .3s ease;
+  }
+  .person-card-header { display: flex; align-items: center; gap: 9px; margin-bottom: 16px; }
+  .person-badge {
+    width: 28px; height: 28px; background: var(--brown);
+    color: var(--white); border-radius: 50%;
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .person-card-title { font-size: 13px; font-weight: 600; color: var(--brown); letter-spacing: 0.5px; }
+  .person-card .field { margin-bottom: 12px; }
+  .person-card label { font-size: 12px; }
+  .person-card input, .person-card select, .person-card textarea {
+    font-size: 14px; padding: 10px 12px; background: var(--cream-mid);
+  }
+  .person-card select { padding-right: 34px; }
+  .person-card input:focus, .person-card select:focus, .person-card textarea:focus { background: var(--white); }
+
+  /* Buttons */
+  .btn-primary {
+    width: 100%; padding: 15px; background: var(--brown);
+    color: var(--white); border: none; border-radius: 12px;
+    font-family: 'Sarabun', sans-serif; font-size: 16px; font-weight: 600;
+    letter-spacing: 0.5px; cursor: pointer;
+    transition: background .2s, transform .1s, box-shadow .2s;
+    box-shadow: 0 4px 16px rgba(107,76,69,0.25); margin-top: 8px;
+  }
+  .btn-primary:hover { background: var(--brown-light); box-shadow: 0 6px 20px rgba(107,76,69,0.30); }
+  .btn-primary:active { transform: scale(0.98); }
+
+  /* Result */
+  #result-section { display: none; animation: fadeUp .35s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .result-box {
+    background: var(--cream-mid); border: 1.5px solid var(--brown-pale);
+    border-radius: 12px; padding: 20px 18px;
+    font-size: 15px; line-height: 2; color: var(--text);
+    white-space: pre-wrap; word-break: break-word;
+    font-family: 'Sarabun', sans-serif;
+  }
+  .result-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .btn-copy {
+    padding: 13px; background: var(--brown); color: var(--white);
+    border: none; border-radius: 10px; font-family: 'Sarabun', sans-serif;
+    font-size: 14px; font-weight: 600; cursor: pointer; transition: background .2s;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+  }
+  .btn-copy:hover { background: var(--brown-light); }
+  .btn-copy.copied { background: #5a8a5a; }
+  .btn-clear {
+    padding: 13px; background: transparent; color: var(--brown-light);
+    border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: 'Sarabun', sans-serif; font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: all .2s;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+  }
+  .btn-clear:hover { border-color: var(--brown-pale); background: var(--cream-dark); color: var(--brown); }
+
+  .divider { text-align: center; margin: 6px 0 20px; font-size: 12px; color: var(--brown-pale); letter-spacing: 1.5px; }
+
+  @media (max-width: 400px) {
+    .logo-text h1 { font-size: 22px; }
+    .row-2 { grid-template-columns: 1fr; }
+    .result-actions { grid-template-columns: 1fr; }
+  }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)}
+    40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img class="logo-img" src="/mnt/user-data/uploads/ด_ไซน_ท__ย_งไม_ได_ต__งช__อ.png"
+         onerror="this.style.display='none'" alt="DEETWO Logo">
+    <div class="logo-text">
+      <h1>DEETWO</h1>
+      <p>Thai Massage</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-title">
+    <h2>จองคิวลูกค้า</h2>
+    <p>กรอกข้อมูลเพื่อสร้างข้อความส่งให้หมอนวด</p>
+  </div>
+
+  <!-- Booking info -->
+  <div class="card">
+    <div class="section-label">ข้อมูลการจอง</div>
+    <div class="row-2">
+      <div class="field">
+        <label for="date">วันที่จอง <span class="req">*</span></label>
+        <input type="date" id="date">
+      </div>
+      <div class="field">
+        <label for="time">เวลา <span class="req">*</span></label>
+        <input type="time" id="time">
+      </div>
+    </div>
+    <div class="field">
+      <label for="branch">สาขา <span class="req">*</span></label>
+      <select id="branch">
+        <option value="">— เลือกสาขา —</option>
+        <option value="สาขาอิสรภาพ">สาขาอิสรภาพ</option>
+        <option value="สาขาพุทธมณฑลสาย 4">สาขาพุทธมณฑลสาย 4</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>วิธีการจอง</label>
+      <select id="booking-method">
+        <option value="โทรจอง">โทรจอง</option>
+        <option value="walk in">walk in</option>
+      </select>
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label>จำนวนลูกค้า</label>
+      <div class="person-count-row">
+        <button class="count-btn" onclick="changeCount(-1)">−</button>
+        <span class="count-display" id="count-display">1</span>
+        <button class="count-btn" onclick="changeCount(1)">+</button>
+        <span class="count-label" id="count-label">1 ท่าน</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="persons-container"></div>
+
+  <button class="btn-primary" onclick="generateQueue()">✦ สร้างข้อความคิว</button>
+
+  <!-- Result -->
+  <div id="result-section">
+    <div class="divider">• • •</div>
+    <div class="card">
+      <div class="section-label">ข้อความคิว</div>
+      <div class="result-box" id="result-text"></div>
+      <div class="result-actions">
+        <button class="btn-copy" id="copy-btn" onclick="copyText()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          คัดลอกข้อความ
+        </button>
+        <button class="btn-clear" onclick="clearForm()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+          ล้างข้อมูล
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  let personCount = 1;
+
+  const SERVICES = ['นวดไทย','ไมเกรน','คอ บ่า ไหล่','อโรม่า','นวดน้ำมัน / ออยรีดเส้น','สปาผม','ฝังสีปาก','สปาผม + มาร์คหน้า+สปาหู'];
+  const DURATIONS = [
+    {val:'',label:'— ไม่ระบุ —'},
+    {val:'1 ชั่วโมง',label:'1 ชั่วโมง'},
+    {val:'1 ชั่วโมง 30 นาที',label:'1 ชั่วโมง 30 นาที'},
+    {val:'2 ชั่วโมง',label:'2 ชั่วโมง'},
+  ];
+
+  function buildPersonCard(i) {
+    const svcOpts = SERVICES.map(s => `<option value="${s}">${s}</option>`).join('');
+    const durOpts = DURATIONS.map(d => `<option value="${d.val}">${d.label}</option>`).join('');
+
+    // Card 1: show name + phone. Cards 2+: service/duration/note only
+    const isFirst = i === 1;
+    const title = isFirst ? 'ผู้จอง (ท่านที่ 1)' : `ลูกค้าท่านที่ ${i}`;
+    const namePhoneHTML = isFirst ? `
+      <div class="row-2">
+        <div class="field">
+          <label>ชื่อผู้จอง <span class="req">*</span></label>
+          <input type="text" id="name-1" placeholder="ชื่อ-นามสกุล">
+        </div>
+        <div class="field">
+          <label>เบอร์โทร <span class="req">*</span></label>
+          <input type="tel" id="phone-1" placeholder="0xx-xxx-xxxx">
+        </div>
+      </div>` : '';
+
+    return `
+    <div class="person-card" id="person-${i}">
+      <div class="person-card-header">
+        <div class="person-badge">${i}</div>
+        <div class="person-card-title">${title}</div>
+      </div>
+      ${namePhoneHTML}
+      <div class="row-2">
+        <div class="field">
+          <label>บริการ <span class="req">*</span></label>
+          <select id="service-${i}">
+            <option value="">— เลือก —</option>
+            ${svcOpts}
+          </select>
+        </div>
+        <div class="field">
+          <label>จำนวนชั่วโมง</label>
+          <select id="duration-${i}">${durOpts}</select>
+        </div>
+      </div>
+      <div class="field">
+        <label>หมายเหตุ</label>
+        <textarea id="note-${i}" placeholder="อาการพิเศษ, ความต้องการพิเศษ..."></textarea>
+      </div>
+    </div>`;
+  }
+
+  function saveValues() {
+    const saved = [];
+    for (let i = 1; i <= personCount; i++) {
+      saved.push({
+        name:     i===1 ? (document.getElementById('name-1')?.value||'') : '',
+        phone:    i===1 ? (document.getElementById('phone-1')?.value||'') : '',
+        service:  document.getElementById(`service-${i}`)?.value||'',
+        duration: document.getElementById(`duration-${i}`)?.value||'',
+        note:     document.getElementById(`note-${i}`)?.value||'',
+      });
+    }
+    return saved;
+  }
+
+  function renderPersonCards(saved=[]) {
+    const container = document.getElementById('persons-container');
+    container.innerHTML = '';
+    for (let i = 1; i <= personCount; i++) {
+      container.insertAdjacentHTML('beforeend', buildPersonCard(i));
+      const s = saved[i-1];
+      if (s) {
+        if (i===1 && s.name)  document.getElementById('name-1').value = s.name;
+        if (i===1 && s.phone) document.getElementById('phone-1').value = s.phone;
+        if (s.service)  document.getElementById(`service-${i}`).value = s.service;
+        if (s.duration) document.getElementById(`duration-${i}`).value = s.duration;
+        if (s.note)     document.getElementById(`note-${i}`).value = s.note;
+      }
+    }
+  }
+
+  function changeCount(delta) {
+    const next = personCount + delta;
+    if (next < 1 || next > 10) return;
+    const saved = saveValues();
+    personCount = next;
+    document.getElementById('count-display').textContent = personCount;
+    document.getElementById('count-label').textContent = personCount + ' ท่าน';
+    renderPersonCards(saved);
+    document.getElementById('result-section').style.display = 'none';
+  }
+
+  document.getElementById('date').value = new Date().toISOString().split('T')[0];
+  renderPersonCards();
+
+  function formatDate(s) {
+    if (!s) return '—';
+    const d = new Date(s + 'T00:00:00');
+    const days = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+    const mon = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+    return `${d.getDate()} ${mon[d.getMonth()]} ${d.getFullYear()+543} (${days[d.getDay()]})`;
+  }
+  function formatTime(t) { return t ? t + ' น.' : '—'; }
+
+  function generateQueue() {
+    const date   = document.getElementById('date').value;
+    const time   = document.getElementById('time').value;
+    const branch = document.getElementById('branch').value;
+    const bookingMethod = document.getElementById('booking-method').value;
+    if (!date || !time || !branch) { shakeBtn(); alert('⚠️ กรุณากรอกวันที่, เวลา และสาขา'); return; }
+
+    const name  = document.getElementById('name-1').value.trim();
+    const phone = document.getElementById('phone-1').value.trim();
+    if (!name || !phone) { shakeBtn(); alert('⚠️ กรุณากรอกชื่อและเบอร์โทรผู้จอง'); return; }
+
+    const persons = [];
+    for (let i = 1; i <= personCount; i++) {
+      const service  = document.getElementById(`service-${i}`).value;
+      const duration = document.getElementById(`duration-${i}`).value;
+      const note     = document.getElementById(`note-${i}`).value.trim();
+      if (!service) { shakeBtn(); alert(`⚠️ กรุณาเลือกบริการของลูกค้าท่านที่ ${i}`); return; }
+      persons.push({ service, duration, note });
+    }
+
+    // Build output
+    const lines = [];
+    lines.push(`ลูกค้า  : ${bookingMethod}`);
+    lines.push(`📅 วันที่ : ${formatDate(date)}`);
+    lines.push(`🕐 เวลา : ${formatTime(time)}`);
+    lines.push(`📍 สาขา : ${branch}`);
+    lines.push('');
+    
+    lines.push(`🤠ชื่อผู้จอง คุณ ${name}`);
+    lines.push(`📞เบอร์โทร : ${phone}`);
+    lines.push('');
+    lines.push(`👥 จำนวนลูกค้า : ${personCount} ท่าน`);
+
+    persons.forEach((p, idx) => {
+      let row = `${idx + 1}. ${p.service}`;
+      if (p.duration) row += `  ${p.duration}`;
+      lines.push(row);
+      if (p.note) lines.push(`   **หมายเหตุ** : ${p.note}`);
+    });
+
+    lines.push('');
+    
+
+    document.getElementById('result-text').textContent = lines.join('\n');
+    const section = document.getElementById('result-section');
+    section.style.display = 'block';
+    resetCopyBtn();
+    setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+
+  const COPY_SVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>`;
+  const CHECK_SVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+
+  function copyText() {
+    const text = document.getElementById('result-text').textContent;
+    const btn = document.getElementById('copy-btn');
+    const ok = () => {
+      btn.classList.add('copied'); btn.innerHTML = CHECK_SVG + ' คัดลอกแล้ว!';
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = COPY_SVG + ' คัดลอกข้อความ'; }, 2500);
+    };
+    navigator.clipboard.writeText(text).then(ok).catch(() => {
+      const el = document.createElement('textarea');
+      el.value = text; el.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); ok();
+    });
+  }
+
+  function resetCopyBtn() {
+    const btn = document.getElementById('copy-btn');
+    btn.classList.remove('copied');
+    btn.innerHTML = COPY_SVG + ' คัดลอกข้อความ';
+  }
+
+  function clearForm() {
+    document.getElementById('date').value = new Date().toISOString().split('T')[0];
+    document.getElementById('time').value = '';
+    document.getElementById('branch').value = '';
+    document.getElementById('booking-method').value = 'โทรจอง';
+    personCount = 1;
+    document.getElementById('count-display').textContent = '1';
+    document.getElementById('count-label').textContent = '1 ท่าน';
+    renderPersonCards();
+    document.getElementById('result-section').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function shakeBtn() {
+    const btn = document.querySelector('.btn-primary');
+    btn.style.animation = 'none'; btn.offsetHeight; btn.style.animation = 'shake .4s ease';
+  }
+</script>
+</body>
+</html>
