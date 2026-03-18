@@ -282,6 +282,7 @@
   const SERVICES = ['นวดไทย','ไมเกรน','คอ บ่า ไหล่','อโรม่า','นวดน้ำมัน / ออยรีดเส้น','สปาผม','ฝังสีปาก','สปาผม + มาร์คหน้า+สปาหู'];
   const DURATIONS = [
     {val:'',label:'— ไม่ระบุ —'},
+    {val:'30 นาที',label:'30 นาที'},
     {val:'1 ชั่วโมง',label:'1 ชั่วโมง'},
     {val:'1 ชั่วโมง 30 นาที',label:'1 ชั่วโมง 30 นาที'},
     {val:'2 ชั่วโมง',label:'2 ชั่วโมง'},
@@ -307,43 +308,61 @@
       </div>` : '';
 
     return `
-    <div class="person-card" id="person-${i}">
-      <div class="person-card-header">
-        <div class="person-badge">${i}</div>
-        <div class="person-card-title">${title}</div>
-      </div>
-      ${namePhoneHTML}
-      <div class="row-2">
-        <div class="field">
-          <label>บริการ <span class="req">*</span></label>
-          <select id="service-${i}">
-            <option value="">— เลือก —</option>
-            ${svcOpts}
-          </select>
-        </div>
-        <div class="field">
-          <label>จำนวนชั่วโมง</label>
-          <select id="duration-${i}">${durOpts}</select>
-        </div>
-      </div>
-      <div class="field">
-        <label>หมายเหตุ</label>
-        <textarea id="note-${i}" placeholder="อาการพิเศษ, ความต้องการพิเศษ..."></textarea>
-      </div>
-    </div>`;
-  }
+<div class="person-card" id="person-${i}">
+  <div class="person-card-header">
+    <div class="person-badge">${i}</div>
+    <div class="person-card-title">${title}</div>
+  </div>
 
+  ${namePhoneHTML}
+
+  <div class="row-2">
+    <div class="field">
+      <label>บริการ 1 <span class="req">*</span></label>
+      <select id="service-${i}">
+        <option value="">— เลือก —</option>
+        ${svcOpts}
+      </select>
+    </div>
+    <div class="field">
+      <label>เวลา</label>
+      <select id="duration-${i}">${durOpts}</select>
+    </div>
+  </div>
+
+  <div class="row-2">
+    <div class="field">
+      <label>บริการ 2</label>
+      <select id="service2-${i}">
+        <option value="">— ไม่เลือก —</option>
+        ${svcOpts}
+      </select>
+    </div>
+    <div class="field">
+      <label>เวลา</label>
+      <select id="duration2-${i}">${durOpts}</select>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>หมายเหตุ</label>
+    <textarea id="note-${i}"></textarea>
+  </div>
+</div>`;
+  }
   function saveValues() {
     const saved = [];
     for (let i = 1; i <= personCount; i++) {
-      saved.push({
-        name:     i===1 ? (document.getElementById('name-1')?.value||'') : '',
-        phone:    i===1 ? (document.getElementById('phone-1')?.value||'') : '',
-        service:  document.getElementById(`service-${i}`)?.value||'',
-        duration: document.getElementById(`duration-${i}`)?.value||'',
-        note:     document.getElementById(`note-${i}`)?.value||'',
-      });
-    }
+          saved.push({
+      name: i===1 ? (document.getElementById('name-1')?.value||'') : '',
+      phone: i===1 ? (document.getElementById('phone-1')?.value||'') : '',
+      service:  document.getElementById(`service-${i}`)?.value||'',
+      duration: document.getElementById(`duration-${i}`)?.value||'',
+      service2: document.getElementById(`service2-${i}`)?.value||'',
+      duration2: document.getElementById(`duration2-${i}`)?.value||'',
+      note: document.getElementById(`note-${i}`)?.value||'',
+    });
+        }
     return saved;
   }
 
@@ -398,33 +417,61 @@
     if (!name || !phone) { shakeBtn(); alert('⚠️ กรุณากรอกชื่อและเบอร์โทรผู้จอง'); return; }
 
     const persons = [];
-    for (let i = 1; i <= personCount; i++) {
-      const service  = document.getElementById(`service-${i}`).value;
-      const duration = document.getElementById(`duration-${i}`).value;
-      const note     = document.getElementById(`note-${i}`).value.trim();
-      if (!service) { shakeBtn(); alert(`⚠️ กรุณาเลือกบริการของลูกค้าท่านที่ ${i}`); return; }
-      persons.push({ service, duration, note });
-    }
+   for (let i = 1; i <= personCount; i++) {
+  const service  = document.getElementById(`service-${i}`).value;
+  const duration = document.getElementById(`duration-${i}`).value;
+
+  const service2  = document.getElementById(`service2-${i}`).value;
+  const duration2 = document.getElementById(`duration2-${i}`).value;
+
+  const note = document.getElementById(`note-${i}`).value.trim();
+
+  if (!service) {
+    shakeBtn();
+    alert(`⚠️ กรุณาเลือกบริการของลูกค้าท่านที่ ${i}`);
+    return;
+  }
+
+  persons.push({ service, duration, service2, duration2, note });
+}
 
     // Build output
     const lines = [];
-    lines.push(`ลูกค้า  : ${bookingMethod}`);
-    lines.push(`📅 วันที่ : ${formatDate(date)}`);
-    lines.push(`🕐 เวลา : ${formatTime(time)}`);
-    lines.push(`📍 สาขา : ${branch}`);
-    lines.push('');
-    
-    lines.push(`🤠ชื่อผู้จอง คุณ ${name}`);
-    lines.push(`📞เบอร์โทร : ${phone}`);
-    lines.push('');
-    lines.push(`👥 จำนวนลูกค้า : ${personCount} ท่าน`);
 
-    persons.forEach((p, idx) => {
-      let row = `${idx + 1}. ${p.service}`;
-      if (p.duration) row += `  ${p.duration}`;
-      lines.push(row);
-      if (p.note) lines.push(`   **หมายเหตุ** : ${p.note}`);
-    });
+      lines.push(`ลูกค้า  : ${bookingMethod}`);
+      lines.push(`📅 วันที่ : ${formatDate(date)}`);
+      lines.push(`🕐 เวลา : ${formatTime(time)}`);
+      lines.push(`📍 สาขา : ${branch}`);
+      lines.push(`__________________________________`);
+      lines.push('');
+
+      lines.push(`ชื่อผู้จอง คุณ ${name}`);
+      lines.push(`เบอร์โทร : ${phone}`);
+      lines.push(`__________________________________`);
+      lines.push('');
+
+      lines.push(`👥 จำนวนลูกค้า : ${personCount} ท่าน`);
+
+persons.forEach((p, idx) => {
+  lines.push(`ท่านที่ ${idx + 1} :`);
+
+  let count = 1;
+
+  // บริการหลัก
+  let row1 = `   ${count}. ${p.service}`;
+  if (p.duration) row1 += ` ${p.duration}`;
+  lines.push(row1);
+
+  // บริการที่ 2
+  if (p.service2) {
+    count++;
+    let row2 = `   ${count}. ${p.service2}`;
+    if (p.duration2) row2 += ` ${p.duration2}`;
+    lines.push(row2);
+  }
+
+  if (p.note) lines.push(`   **หมายเหตุ** : ${p.note}`);
+});
 
     lines.push('');
     
