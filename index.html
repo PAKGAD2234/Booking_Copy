@@ -738,11 +738,11 @@
     lines.push(`📅 วันที่ : ${formatDate(date)}`);
     lines.push(`🕐 เวลา : ${formatTime(time)}`);
     lines.push(`📍 สาขา : ${branch}`);
-    lines.push(`__________________________________`);
+ 
     lines.push('');
     lines.push(`ชื่อผู้จอง คุณ ${name}`);
     lines.push(`เบอร์โทร : ${phone}`);
-    lines.push(`__________________________________`);
+  
     lines.push('');
     lines.push(`👥 จำนวนลูกค้า : ${personCount} ท่าน`);
 
@@ -764,7 +764,7 @@
         lines.push(row);
       });
       if (personHasPrice) {
-        lines.push(`   💰 รวมท่านที่ ${idx+1} : ${personTotal.toLocaleString()} บาท`);
+       
         grandTotal += personTotal; hasAnyPrice = true;
       }
       if (p.note) lines.push(`   **หมายเหตุ** : ${p.note}`);
@@ -772,7 +772,6 @@
 
     lines.push('');
     if (hasAnyPrice) {
-      lines.push(`__________________________________`);
       lines.push(`💳 ยอดรวมทั้งหมด : ${grandTotal.toLocaleString()} บาท`);
       lines.push('');
     }
