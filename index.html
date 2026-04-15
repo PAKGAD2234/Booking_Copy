@@ -456,6 +456,7 @@
     'อโรม่า':            [600, 900, 1200],
     'ขัดผิว':            [null, null, 1499],
     'นวดแก้อาการ':       [600, 900, 1200],
+    'ฝังสีปาก':            [999, 0, 0],
     'สปาผม':             [550, 825, 1100],
     'นวดตอกเส้น':        [550, 750, 999],
   };
@@ -775,7 +776,6 @@
       lines.push(`💳 ยอดรวมทั้งหมด : ${grandTotal.toLocaleString()} บาท`);
       lines.push('');
     }
-    lines.push(`🏧 สามารถมาชำระเงินที่หน้าเคาน์เตอร์ได้เลยค่ะ`);
 
     document.getElementById('result-text').textContent = lines.join('\n');
     const section = document.getElementById('result-section');
