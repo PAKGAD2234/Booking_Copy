@@ -112,7 +112,6 @@
   .method-btn.active { border-color: var(--brown); background: var(--brown); color: var(--white); }
   .method-btn .method-icon { font-size: 16px; line-height: 1; }
 
-  /* Social method active states */
   .method-btn.active.method-line   { background: var(--line-color); border-color: var(--line-color); }
   .method-btn.active.method-fb     { background: var(--fb-color);   border-color: var(--fb-color);   }
   .method-btn.active.method-ig     { background: var(--ig-color);   border-color: var(--ig-color);   }
@@ -144,6 +143,24 @@
     background: var(--white); box-shadow: none;
     border: none; outline: none;
   }
+
+  /* ── Deposit toggle ─────────────────────────────────────────────── */
+  .deposit-row {
+    display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;
+  }
+  .deposit-btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 16px; border-radius: 10px;
+    border: 1.5px solid var(--border); background: var(--cream);
+    font-family: 'Sarabun', sans-serif; font-size: 13px; font-weight: 500;
+    color: var(--text-soft); cursor: pointer;
+    transition: all .2s; white-space: nowrap;
+  }
+  .deposit-btn:hover { border-color: var(--brown-pale); background: var(--cream-dark); color: var(--brown); }
+  .deposit-btn.active-yes { border-color: #5a8a5a; background: #5a8a5a; color: var(--white); }
+  .deposit-btn.active-no  { border-color: var(--brown-pale); background: var(--cream-dark); color: var(--brown); }
+  .deposit-btn .dep-icon { font-size: 15px; }
+  .deposit-label { font-size: 13px; font-weight: 500; color: var(--text-soft); margin-bottom: 8px; margin-top: 16px; }
 
   /* Count */
   .person-count-row { display: flex; align-items: center; gap: 12px; }
@@ -187,9 +204,10 @@
 
   /* Service rows */
   .service-rows { margin-bottom: 10px; }
+  .service-row-wrap { animation: fadeUp .25s ease; }
   .service-row {
     display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px;
-    align-items: end; margin-bottom: 8px; animation: fadeUp .25s ease;
+    align-items: end; margin-bottom: 4px;
   }
   .service-row .field { margin-bottom: 0; }
   .btn-remove-service {
@@ -200,6 +218,42 @@
     transition: all .2s; flex-shrink: 0; align-self: end; padding-bottom: 2px;
   }
   .btn-remove-service:hover { border-color: #c0392b; color: #c0392b; background: #fff5f5; }
+
+  /* ── Spa ear addon ─────────────────────────────────────────────── */
+  .spa-ear-addon {
+    overflow: hidden; max-height: 0; opacity: 0;
+    transition: max-height .3s ease, opacity .3s ease, margin .3s ease;
+    margin: 0;
+  }
+  .spa-ear-addon.visible {
+    max-height: 60px; opacity: 1; margin: 6px 0 6px 2px;
+  }
+  .spa-ear-inner {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--cream-mid); border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 8px 14px; cursor: pointer;
+    transition: all .2s; user-select: none;
+  }
+  .spa-ear-inner:hover { border-color: var(--brown-pale); background: var(--cream-dark); }
+  .spa-ear-inner.checked { border-color: var(--brown); background: #f9f0ec; }
+  .spa-ear-cb {
+    width: 18px; height: 18px; border-radius: 5px;
+    border: 2px solid var(--brown-pale); background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all .2s;
+  }
+  .spa-ear-inner.checked .spa-ear-cb {
+    background: var(--brown); border-color: var(--brown);
+  }
+  .spa-ear-check { display: none; }
+  .spa-ear-inner.checked .spa-ear-check { display: block; }
+  .spa-ear-text { font-size: 13px; font-weight: 500; color: var(--text-soft); }
+  .spa-ear-inner.checked .spa-ear-text { color: var(--brown); }
+  .spa-ear-price {
+    font-size: 12px; font-weight: 600;
+    background: var(--cream-dark); color: var(--brown);
+    border-radius: 6px; padding: 2px 8px;
+  }
 
   .price-badge {
     font-size: 12px; font-weight: 600; color: var(--brown);
@@ -288,6 +342,7 @@
     .service-row { grid-template-columns: 1fr 1fr auto; }
     .booking-method-group { gap: 6px; }
     .method-btn { font-size: 12px; padding: 8px 11px; }
+    .deposit-btn { font-size: 12px; padding: 8px 12px; }
   }
   @keyframes shake {
     0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)}
@@ -336,7 +391,7 @@
       </select>
     </div>
 
-    <!-- Booking method (buttons) -->
+    <!-- Booking method -->
     <div class="field" style="margin-bottom:0">
       <label>วิธีการจอง</label>
       <div class="booking-method-group" id="booking-method-group">
@@ -357,12 +412,23 @@
         </button>
       </div>
 
-      <!-- Social ID input (appears when Line/FB/IG selected) -->
+      <!-- Social ID input -->
       <div class="social-id-field" id="social-id-field">
         <div class="social-id-inner">
           <span class="social-id-badge" id="social-id-badge">Line ID :</span>
           <input type="text" id="social-id-input" placeholder="กรอก ID หรือชื่อลูกค้า">
         </div>
+      </div>
+
+      <!-- ── Deposit toggle ── -->
+      <div class="deposit-label">มัดจำ</div>
+      <div class="deposit-row">
+        <button type="button" class="deposit-btn" id="dep-yes" onclick="selectDeposit('yes')">
+          <span class="dep-icon">💵</span> มีมัดจำ 500 บาท
+        </button>
+        <button type="button" class="deposit-btn" id="dep-no" onclick="selectDeposit('no')">
+          <span class="dep-icon">✕</span> ไม่มีมัดจำ
+        </button>
       </div>
     </div>
 
@@ -413,17 +479,25 @@
 <script>
   let personCount = 1;
   let currentMethod = 'โทรจอง';
-  let currentSocial = null; // 'line' | 'facebook' | 'instagram' | null
+  let currentSocial = null;
+  let depositStatus = null; // 'yes' | 'no' | null
 
   const personServiceCount = {};
 
-  // ── SOCIAL LABELS ──────────────────────────────────────────────────────────
   const SOCIAL_LABELS = {
-    line:      { badge: 'Line ID :',      placeholder: 'กรอก Line ID หรือชื่อลูกค้า' },
-    facebook:  { badge: 'Facebook :',     placeholder: 'กรอกชื่อ Facebook ลูกค้า' },
-    instagram: { badge: 'Instagram :',    placeholder: 'กรอก @username ลูกค้า' },
+    line:      { badge: 'Line ID :',   placeholder: 'กรอก Line ID หรือชื่อลูกค้า' },
+    facebook:  { badge: 'Facebook :',  placeholder: 'กรอกชื่อ Facebook ลูกค้า' },
+    instagram: { badge: 'Instagram :', placeholder: 'กรอก @username ลูกค้า' },
   };
 
+  // ── DEPOSIT ───────────────────────────────────────────────────────────────
+  function selectDeposit(val) {
+    depositStatus = depositStatus === val ? null : val;
+    document.getElementById('dep-yes').className = 'deposit-btn' + (depositStatus === 'yes' ? ' active-yes' : '');
+    document.getElementById('dep-no').className  = 'deposit-btn' + (depositStatus === 'no'  ? ' active-no'  : '');
+  }
+
+  // ── SOCIAL ────────────────────────────────────────────────────────────────
   function selectMethod(btn) {
     document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -445,20 +519,20 @@
     }
   }
 
-  // ─── PRICE TABLE ───────────────────────────────────────────────────────────
+  // ── PRICE TABLE ───────────────────────────────────────────────────────────
   const PRICE_TABLE = {
-    'นวดไทย':            [250, 375, 500],
-    'ไมเกรน':            [250, 375, 500],
-    'นวดฝ่าเท้า':        [250, 375, 500],
-    'คอ บ่า ไหล่':       [300, 450, 600],
-    'นวดน้ำมัน / ออยรีดเส้น': [350, 525, 700],
-    'อโรม่าทองคำ':       [999, 1499, 1998],
-    'อโรม่า':            [600, 900, 1200],
-    'ขัดผิว':            [null, null, 1499],
-    'นวดแก้อาการ':       [600, 900, 1200],
-    'ฝังสีปาก':            [999, 0, 0],
-    'สปาผม':             [550, 825, 1100],
-    'นวดตอกเส้น':        [550, 750, 999],
+    'นวดไทย':                     [250, 375, 500],
+    'ไมเกรน':                     [250, 375, 500],
+    'นวดฝ่าเท้า':                 [250, 375, 500],
+    'คอ บ่า ไหล่':                [300, 450, 600],
+    'นวดน้ำมัน / ออยรีดเส้น':    [350, 525, 700],
+    'อโรม่าทองคำ':                [999, 1499, 1998],
+    'อโรม่า':                     [600, 900, 1200],
+    'ขัดผิว':                     [null, null, 1499],
+    'นวดแก้อาการ':                [null, null,null],
+    'ฝังสีปาก':                   [550, 825, 1100],
+    'สปาผม':                      [550, 825, 1100],
+    'นวดตอกเส้น':                 [550, 750, 999],
   };
 
   const DUR_IDX = {
@@ -474,6 +548,10 @@
     if (idx === undefined) return null;
     return row[idx];
   }
+
+  // ── SERVICES THAT TRIGGER SPA EAR ADDON ───────────────────────────────────
+  const SPA_EAR_TRIGGER = new Set(['สปาผม']);
+  const SPA_EAR_PRICE = 300;
 
   const SERVICES = [
     'นวดไทย','ไมเกรน','คอ บ่า ไหล่',
@@ -500,23 +578,66 @@
       `<button class="btn-remove-service" title="ลบบริการ"
          onclick="removeServiceRow(${personIdx}, ${rowIdx})">×</button>`;
     return `
-<div class="service-row" id="svcrow-${personIdx}-${rowIdx}">
-  <div class="field">
-    <label>บริการ${isFirst ? ' <span class="req">*</span>' : ''}</label>
-    <select id="service-${personIdx}-${rowIdx}" onchange="updatePriceDisplay(${personIdx},${rowIdx}); updateGrandTotal()">
-      <option value="">— เลือก —</option>
-      ${svcOpts()}
-    </select>
+<div class="service-row-wrap" id="svcwrap-${personIdx}-${rowIdx}">
+  <div class="service-row" id="svcrow-${personIdx}-${rowIdx}">
+    <div class="field">
+      <label>บริการ${isFirst ? ' <span class="req">*</span>' : ''}</label>
+      <select id="service-${personIdx}-${rowIdx}"
+        onchange="updatePriceDisplay(${personIdx},${rowIdx}); checkSpaEar(${personIdx},${rowIdx}); updateGrandTotal()">
+        <option value="">— เลือก —</option>
+        ${svcOpts()}
+      </select>
+    </div>
+    <div class="field">
+      <label>เวลา</label>
+      <select id="duration-${personIdx}-${rowIdx}"
+        onchange="updatePriceDisplay(${personIdx},${rowIdx}); updateGrandTotal()">
+        ${durOpts()}
+      </select>
+    </div>
+    ${removeBtn}
   </div>
-  <div class="field">
-    <label>เวลา</label>
-    <select id="duration-${personIdx}-${rowIdx}" onchange="updatePriceDisplay(${personIdx},${rowIdx}); updateGrandTotal()">
-      ${durOpts()}
-    </select>
+  <div id="pricebadge-${personIdx}-${rowIdx}"></div>
+  <!-- Spa ear addon -->
+  <div class="spa-ear-addon" id="spaear-${personIdx}-${rowIdx}">
+    <div class="spa-ear-inner" id="spaear-inner-${personIdx}-${rowIdx}"
+         onclick="toggleSpaEar(${personIdx},${rowIdx})">
+      <div class="spa-ear-cb">
+        <svg class="spa-ear-check" width="11" height="9" viewBox="0 0 11 9" fill="none">
+          <polyline points="1 4.5 4 7.5 10 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="spa-ear-text">เพิ่มสปาหู</span>
+      <span class="spa-ear-price">+${SPA_EAR_PRICE.toLocaleString()} บาท</span>
+    </div>
   </div>
-  ${removeBtn}
-</div>
-<div id="pricebadge-${personIdx}-${rowIdx}"></div>`;
+</div>`;
+  }
+
+  function checkSpaEar(personIdx, rowIdx) {
+    const svc = document.getElementById(`service-${personIdx}-${rowIdx}`)?.value || '';
+    const addonEl = document.getElementById(`spaear-${personIdx}-${rowIdx}`);
+    if (!addonEl) return;
+    if (SPA_EAR_TRIGGER.has(svc)) {
+      addonEl.classList.add('visible');
+    } else {
+      addonEl.classList.remove('visible');
+      // uncheck if hidden
+      const inner = document.getElementById(`spaear-inner-${personIdx}-${rowIdx}`);
+      if (inner) inner.classList.remove('checked');
+    }
+  }
+
+  function toggleSpaEar(personIdx, rowIdx) {
+    const inner = document.getElementById(`spaear-inner-${personIdx}-${rowIdx}`);
+    if (!inner) return;
+    inner.classList.toggle('checked');
+    updateGrandTotal();
+  }
+
+  function isSpaEarChecked(personIdx, rowIdx) {
+    const inner = document.getElementById(`spaear-inner-${personIdx}-${rowIdx}`);
+    return inner ? inner.classList.contains('checked') : false;
   }
 
   function updatePriceDisplay(personIdx, rowIdx) {
@@ -540,8 +661,7 @@
   }
 
   function removeServiceRow(personIdx, rowIdx) {
-    document.getElementById(`svcrow-${personIdx}-${rowIdx}`)?.remove();
-    document.getElementById(`pricebadge-${personIdx}-${rowIdx}`)?.remove();
+    document.getElementById(`svcwrap-${personIdx}-${rowIdx}`)?.remove();
     updateGrandTotal();
   }
 
@@ -593,16 +713,18 @@
       if (!el) continue;
       const svc = el.value;
       const dur = document.getElementById(`duration-${i}-${r}`)?.value || '';
-      if (svc) services.push({ service: svc, duration: dur });
+      const spaEar = isSpaEarChecked(i, r);
+      if (svc) services.push({ service: svc, duration: dur, spaEar, rowIdx: r });
     }
     return services;
   }
 
   function computePersonTotal(services) {
     let total = 0; let hasPrice = false;
-    services.forEach(({service, duration}) => {
+    services.forEach(({ service, duration, spaEar }) => {
       const p = getPrice(service, duration);
       if (p !== null && p !== undefined) { total += p; hasPrice = true; }
+      if (spaEar) { total += SPA_EAR_PRICE; hasPrice = true; }
     });
     return hasPrice ? total : null;
   }
@@ -658,9 +780,13 @@
           const rowIdx = ri + 1;
           const selEl = document.getElementById(`service-${i}-${rowIdx}`);
           const durEl = document.getElementById(`duration-${i}-${rowIdx}`);
-          if (selEl && sv.service) selEl.value = sv.service;
+          if (selEl && sv.service) { selEl.value = sv.service; checkSpaEar(i, rowIdx); }
           if (durEl && sv.duration) durEl.value = sv.duration;
           updatePriceDisplay(i, rowIdx);
+          if (sv.spaEar) {
+            const inner = document.getElementById(`spaear-inner-${i}-${rowIdx}`);
+            if (inner) inner.classList.add('checked');
+          }
         });
         if (s.note) document.getElementById(`note-${i}`).value = s.note;
       }
@@ -691,7 +817,6 @@
   }
   function formatTime(t) { return t ? t + ' น.' : '—'; }
 
-  // ── SOCIAL ICON FOR TEXT OUTPUT ────────────────────────────────────────────
   const SOCIAL_ICONS = { line: '💬', facebook: '📘', instagram: '📷' };
 
   function generateQueue() {
@@ -704,7 +829,6 @@
     const phone = document.getElementById('phone-1').value.trim();
     if (!name || !phone) { shakeBtn(); alert('⚠️ กรุณากรอกชื่อและเบอร์โทรผู้จอง'); return; }
 
-    // Social ID validation
     const socialId = document.getElementById('social-id-input').value.trim();
     if (currentSocial && !socialId) {
       shakeBtn();
@@ -726,24 +850,29 @@
 
     const lines = [];
 
-    // Method line with social icon
     const methodIcon = currentSocial ? SOCIAL_ICONS[currentSocial] : (currentMethod === 'โทรจอง' ? '📞' : '🚶');
     lines.push(`ลูกค้า  : ${methodIcon} ${currentMethod}`);
 
-    // Social ID line
     if (currentSocial && socialId) {
       const lbl = SOCIAL_LABELS[currentSocial].badge;
       lines.push(`${methodIcon} ${lbl} ${socialId}`);
     }
 
+    // Deposit line
+    if (depositStatus === 'yes') {
+      lines.push(`💵 มัดจำ : 500 บาท`);
+    } else if (depositStatus === 'no') {
+      lines.push(`💵 มัดจำ : ไม่มีมัดจำ`);
+    }
+
     lines.push(`📅 วันที่ : ${formatDate(date)}`);
     lines.push(`🕐 เวลา : ${formatTime(time)}`);
     lines.push(`📍 สาขา : ${branch}`);
- 
+
     lines.push('');
     lines.push(`ชื่อผู้จอง คุณ ${name}`);
     lines.push(`เบอร์โทร : ${phone}`);
-  
+
     lines.push('');
     lines.push(`👥 จำนวนลูกค้า : ${personCount} ท่าน`);
 
@@ -763,9 +892,13 @@
           personTotal += price; personHasPrice = true;
         }
         lines.push(row);
+        // Spa ear addon line
+        if (sv.spaEar) {
+          lines.push(`      + สปาหู (+${SPA_EAR_PRICE.toLocaleString()} บาท)`);
+          personTotal += SPA_EAR_PRICE; personHasPrice = true;
+        }
       });
       if (personHasPrice) {
-       
         grandTotal += personTotal; hasAnyPrice = true;
       }
       if (p.note) lines.push(`   **หมายเหตุ** : ${p.note}`);
@@ -811,12 +944,15 @@
     document.getElementById('date').value = new Date().toISOString().split('T')[0];
     document.getElementById('time').value = '';
     document.getElementById('branch').value = '';
-    // reset method
     document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
     document.querySelector('[data-method="โทรจอง"]').classList.add('active');
     currentMethod = 'โทรจอง'; currentSocial = null;
     document.getElementById('social-id-field').classList.remove('visible');
     document.getElementById('social-id-input').value = '';
+    // reset deposit
+    depositStatus = null;
+    document.getElementById('dep-yes').className = 'deposit-btn';
+    document.getElementById('dep-no').className  = 'deposit-btn';
     personCount = 1;
     document.getElementById('count-display').textContent = '1';
     document.getElementById('count-label').textContent = '1 ท่าน';
