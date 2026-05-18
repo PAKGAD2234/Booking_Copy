@@ -33,12 +33,9 @@
         --line-color: #00b900;
         --fb-color: #1877f2;
         --ig-color: #c13584;
+        --sheet-color: #1a73e8;
       }
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
       body {
         font-family: "Sarabun", sans-serif;
         background: var(--cream);
@@ -56,745 +53,351 @@
         z-index: 100;
         box-shadow: 0 2px 12px rgba(107, 76, 69, 0.07);
       }
-      .logo-wrap {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 14px;
-      }
-      .logo-img {
-        width: 60px;
-        height: 60px;
-        object-fit: contain;
-      }
+      .logo-wrap { display: flex; align-items: center; justify-content: center; gap: 14px; }
+      .logo-img { width: 60px; height: 60px; object-fit: contain; }
       .logo-text h1 {
         font-family: "Cormorant Garamond", serif;
-        font-size: 26px;
-        font-weight: 600;
-        color: var(--brown);
-        letter-spacing: 3px;
-        line-height: 1;
+        font-size: 26px; font-weight: 600; color: var(--brown);
+        letter-spacing: 3px; line-height: 1;
       }
       .logo-text p {
-        font-size: 10px;
-        font-weight: 500;
-        color: var(--brown-light);
-        letter-spacing: 3.5px;
-        text-transform: uppercase;
-        margin-top: 4px;
+        font-size: 10px; font-weight: 500; color: var(--brown-light);
+        letter-spacing: 3.5px; text-transform: uppercase; margin-top: 4px;
       }
 
-      main {
-        max-width: 560px;
-        margin: 0 auto;
-        padding: 28px 16px 60px;
-      }
-      .page-title {
-        text-align: center;
-        margin-bottom: 24px;
-      }
+      main { max-width: 560px; margin: 0 auto; padding: 28px 16px 60px; }
+      .page-title { text-align: center; margin-bottom: 24px; }
       .page-title h2 {
         font-family: "Cormorant Garamond", serif;
-        font-size: 22px;
-        font-weight: 500;
-        color: var(--brown);
-        letter-spacing: 1px;
+        font-size: 22px; font-weight: 500; color: var(--brown); letter-spacing: 1px;
       }
-      .page-title p {
-        font-size: 13px;
-        color: var(--text-soft);
-        margin-top: 5px;
-      }
+      .page-title p { font-size: 13px; color: var(--text-soft); margin-top: 5px; }
 
       .card {
-        background: var(--white);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: 24px 20px;
-        margin-bottom: 16px;
-        border: 1px solid var(--cream-dark);
+        background: var(--white); border-radius: var(--radius);
+        box-shadow: var(--shadow); padding: 24px 20px;
+        margin-bottom: 16px; border: 1px solid var(--cream-dark);
       }
       .section-label {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--brown-pale);
-        margin-bottom: 18px;
+        display: flex; align-items: center; gap: 8px;
+        font-size: 11px; font-weight: 600; letter-spacing: 2px;
+        text-transform: uppercase; color: var(--brown-pale); margin-bottom: 18px;
       }
-      .section-label::after {
-        content: "";
-        flex: 1;
-        height: 1px;
-        background: var(--cream-dark);
-      }
+      .section-label::after { content: ""; flex: 1; height: 1px; background: var(--cream-dark); }
 
-      .field {
-        margin-bottom: 16px;
-      }
-      .field:last-child {
-        margin-bottom: 0;
-      }
-      label {
-        display: block;
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--text-soft);
-        margin-bottom: 7px;
-      }
-      label span.req {
-        color: var(--brown-pale);
-        margin-left: 3px;
-      }
+      .field { margin-bottom: 16px; }
+      .field:last-child { margin-bottom: 0; }
+      label { display: block; font-size: 13px; font-weight: 500; color: var(--text-soft); margin-bottom: 7px; }
+      label span.req { color: var(--brown-pale); margin-left: 3px; }
 
-      input,
-      select,
-      textarea {
-        width: 100%;
-        padding: 12px 14px;
-        border: 1.5px solid var(--border);
-        border-radius: 10px;
-        font-family: "Sarabun", sans-serif;
-        font-size: 15px;
-        color: var(--text);
-        background: var(--cream);
-        transition:
-          border-color 0.2s,
-          box-shadow 0.2s,
-          background 0.2s;
-        appearance: none;
-        -webkit-appearance: none;
-        outline: none;
+      input, select, textarea {
+        width: 100%; padding: 12px 14px;
+        border: 1.5px solid var(--border); border-radius: 10px;
+        font-family: "Sarabun", sans-serif; font-size: 15px;
+        color: var(--text); background: var(--cream);
+        transition: border-color .2s, box-shadow .2s, background .2s;
+        appearance: none; -webkit-appearance: none; outline: none;
       }
-      input:focus,
-      select:focus,
-      textarea:focus {
+      input:focus, select:focus, textarea:focus {
         border-color: var(--brown-light);
         background: var(--white);
         box-shadow: 0 0 0 3px rgba(107, 76, 69, 0.08);
       }
       select {
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a7065' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 14px center;
-        padding-right: 38px;
-        cursor: pointer;
+        background-repeat: no-repeat; background-position: right 14px center;
+        padding-right: 38px; cursor: pointer;
       }
-      textarea {
-        resize: vertical;
-        min-height: 72px;
-        line-height: 1.6;
-      }
-      .row-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
+      textarea { resize: vertical; min-height: 72px; line-height: 1.6; }
+      .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-      /* ── Booking method buttons ─────────────────────────────────────── */
-      .booking-method-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 2px;
-      }
+      .booking-method-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
       .method-btn {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        padding: 9px 14px;
-        border-radius: 10px;
-        border: 1.5px solid var(--border);
-        background: var(--cream);
-        font-family: "Sarabun", sans-serif;
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--text-soft);
-        cursor: pointer;
-        transition: all 0.2s;
-        white-space: nowrap;
+        display: flex; align-items: center; gap: 7px;
+        padding: 9px 14px; border-radius: 10px;
+        border: 1.5px solid var(--border); background: var(--cream);
+        font-family: "Sarabun", sans-serif; font-size: 13px; font-weight: 500;
+        color: var(--text-soft); cursor: pointer; transition: all .2s; white-space: nowrap;
       }
-      .method-btn:hover {
-        border-color: var(--brown-pale);
-        background: var(--cream-dark);
-        color: var(--brown);
-      }
-      .method-btn.active {
-        border-color: var(--brown);
-        background: var(--brown);
-        color: var(--white);
-      }
-      .method-btn .method-icon {
-        font-size: 16px;
-        line-height: 1;
-      }
+      .method-btn:hover { border-color: var(--brown-pale); background: var(--cream-dark); color: var(--brown); }
+      .method-btn.active { border-color: var(--brown); background: var(--brown); color: var(--white); }
+      .method-btn .method-icon { font-size: 16px; line-height: 1; }
+      .method-btn.active.method-line { background: var(--line-color); border-color: var(--line-color); }
+      .method-btn.active.method-fb { background: var(--fb-color); border-color: var(--fb-color); }
+      .method-btn.active.method-ig { background: var(--ig-color); border-color: var(--ig-color); }
 
-      .method-btn.active.method-line {
-        background: var(--line-color);
-        border-color: var(--line-color);
-      }
-      .method-btn.active.method-fb {
-        background: var(--fb-color);
-        border-color: var(--fb-color);
-      }
-      .method-btn.active.method-ig {
-        background: var(--ig-color);
-        border-color: var(--ig-color);
-      }
-
-      /* ── Social ID field ────────────────────────────────────────────── */
       .social-id-field {
-        overflow: hidden;
-        max-height: 0;
-        transition:
-          max-height 0.3s ease,
-          opacity 0.3s ease,
-          margin-top 0.3s ease;
-        opacity: 0;
-        margin-top: 0;
+        overflow: hidden; max-height: 0;
+        transition: max-height .3s ease, opacity .3s ease, margin-top .3s ease;
+        opacity: 0; margin-top: 0;
       }
-      .social-id-field.visible {
-        max-height: 100px;
-        opacity: 1;
-        margin-top: 12px;
-      }
+      .social-id-field.visible { max-height: 100px; opacity: 1; margin-top: 12px; }
       .social-id-inner {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: var(--cream-mid);
-        border: 1.5px solid var(--border);
-        border-radius: 10px;
-        padding: 4px 4px 4px 12px;
+        display: flex; align-items: center; gap: 10px;
+        background: var(--cream-mid); border: 1.5px solid var(--border);
+        border-radius: 10px; padding: 4px 4px 4px 12px;
       }
-      .social-id-badge {
-        font-size: 12px;
-        font-weight: 600;
-        white-space: nowrap;
-        color: var(--text-soft);
-        flex-shrink: 0;
-      }
+      .social-id-badge { font-size: 12px; font-weight: 600; white-space: nowrap; color: var(--text-soft); flex-shrink: 0; }
       .social-id-inner input {
-        border: none;
-        background: transparent;
-        padding: 8px 10px;
-        font-size: 14px;
-        border-radius: 7px;
-        flex: 1;
-        box-shadow: none;
+        border: none; background: transparent; padding: 8px 10px;
+        font-size: 14px; border-radius: 7px; flex: 1; box-shadow: none;
       }
-      .social-id-inner input:focus {
-        background: var(--white);
-        box-shadow: none;
-        border: none;
-        outline: none;
-      }
+      .social-id-inner input:focus { background: var(--white); box-shadow: none; border: none; outline: none; }
 
-      /* ── Deposit toggle ─────────────────────────────────────────────── */
-      .deposit-row {
-        display: flex;
-        gap: 10px;
-        margin-top: 16px;
-        flex-wrap: wrap;
-      }
+      .deposit-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
       .deposit-btn {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        padding: 9px 16px;
-        border-radius: 10px;
-        border: 1.5px solid var(--border);
-        background: var(--cream);
-        font-family: "Sarabun", sans-serif;
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--text-soft);
-        cursor: pointer;
-        transition: all 0.2s;
-        white-space: nowrap;
+        display: flex; align-items: center; gap: 7px;
+        padding: 9px 16px; border-radius: 10px;
+        border: 1.5px solid var(--border); background: var(--cream);
+        font-family: "Sarabun", sans-serif; font-size: 13px; font-weight: 500;
+        color: var(--text-soft); cursor: pointer; transition: all .2s; white-space: nowrap;
       }
-      .deposit-btn:hover {
-        border-color: var(--brown-pale);
-        background: var(--cream-dark);
-        color: var(--brown);
-      }
-      .deposit-btn.active-yes {
-        border-color: #5a8a5a;
-        background: #5a8a5a;
-        color: var(--white);
-      }
-      .deposit-btn.active-no {
-        border-color: var(--brown-pale);
-        background: var(--cream-dark);
-        color: var(--brown);
-      }
-      .deposit-btn .dep-icon {
-        font-size: 15px;
-      }
-      .deposit-label {
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--text-soft);
-        margin-bottom: 8px;
-        margin-top: 16px;
-      }
+      .deposit-btn:hover { border-color: var(--brown-pale); background: var(--cream-dark); color: var(--brown); }
+      .deposit-btn.active-yes { border-color: #5a8a5a; background: #5a8a5a; color: var(--white); }
+      .deposit-btn.active-no { border-color: var(--brown-pale); background: var(--cream-dark); color: var(--brown); }
+      .deposit-btn .dep-icon { font-size: 15px; }
+      .deposit-label { font-size: 13px; font-weight: 500; color: var(--text-soft); margin-bottom: 8px; margin-top: 16px; }
 
-      /* Count */
-      .person-count-row {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
+      .person-count-row { display: flex; align-items: center; gap: 12px; }
       .count-btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        border: 1.5px solid var(--border);
-        background: var(--cream);
-        color: var(--brown);
-        font-size: 20px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s;
-        flex-shrink: 0;
+        width: 40px; height: 40px; border-radius: 50%;
+        border: 1.5px solid var(--border); background: var(--cream);
+        color: var(--brown); font-size: 20px; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all .2s; flex-shrink: 0;
       }
-      .count-btn:hover {
-        border-color: var(--brown-pale);
-        background: var(--cream-dark);
-      }
+      .count-btn:hover { border-color: var(--brown-pale); background: var(--cream-dark); }
       .count-display {
-        font-size: 22px;
-        font-weight: 600;
-        color: var(--brown);
-        min-width: 28px;
-        text-align: center;
+        font-size: 22px; font-weight: 600; color: var(--brown);
+        min-width: 28px; text-align: center;
         font-family: "Cormorant Garamond", serif;
       }
-      .count-label {
-        font-size: 14px;
-        color: var(--text-soft);
-      }
+      .count-label { font-size: 14px; color: var(--text-soft); }
 
-      /* Person cards */
       .person-card {
-        background: var(--white);
-        border: 1px solid var(--cream-dark);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: 20px 18px;
-        margin-bottom: 12px;
-        animation: fadeUp 0.3s ease;
+        background: var(--white); border: 1px solid var(--cream-dark);
+        border-radius: var(--radius); box-shadow: var(--shadow);
+        padding: 20px 18px; margin-bottom: 12px; animation: fadeUp .3s ease;
       }
-      .person-card-header {
-        display: flex;
-        align-items: center;
-        gap: 9px;
-        margin-bottom: 16px;
-      }
+      .person-card-header { display: flex; align-items: center; gap: 9px; margin-bottom: 16px; }
       .person-badge {
-        width: 28px;
-        height: 28px;
-        background: var(--brown);
-        color: var(--white);
-        border-radius: 50%;
-        font-size: 12px;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
+        width: 28px; height: 28px; background: var(--brown);
+        color: var(--white); border-radius: 50%;
+        font-size: 12px; font-weight: 700;
+        display: flex; align-items: center; justify-content: center; flex-shrink: 0;
       }
-      .person-card-title {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--brown);
-        letter-spacing: 0.5px;
+      .person-card-title { font-size: 13px; font-weight: 600; color: var(--brown); letter-spacing: .5px; }
+      .person-card .field { margin-bottom: 12px; }
+      .person-card label { font-size: 12px; }
+      .person-card input, .person-card select, .person-card textarea {
+        font-size: 14px; padding: 10px 12px; background: var(--cream-mid);
       }
-      .person-card .field {
-        margin-bottom: 12px;
-      }
-      .person-card label {
-        font-size: 12px;
-      }
-      .person-card input,
-      .person-card select,
-      .person-card textarea {
-        font-size: 14px;
-        padding: 10px 12px;
-        background: var(--cream-mid);
-      }
-      .person-card select {
-        padding-right: 34px;
-      }
-      .person-card input:focus,
-      .person-card select:focus,
-      .person-card textarea:focus {
-        background: var(--white);
-      }
+      .person-card select { padding-right: 34px; }
+      .person-card input:focus, .person-card select:focus, .person-card textarea:focus { background: var(--white); }
 
-      /* Service rows */
-      .service-rows {
-        margin-bottom: 10px;
-      }
-      .service-row-wrap {
-        animation: fadeUp 0.25s ease;
-      }
-      .service-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr auto;
-        gap: 8px;
-        align-items: end;
-        margin-bottom: 4px;
-      }
-      .service-row .field {
-        margin-bottom: 0;
-      }
+      .service-rows { margin-bottom: 10px; }
+      .service-row-wrap { animation: fadeUp .25s ease; }
+      .service-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; align-items: end; margin-bottom: 4px; }
+      .service-row .field { margin-bottom: 0; }
       .btn-remove-service {
-        width: 34px;
-        height: 38px;
-        border-radius: 8px;
-        border: 1.5px solid var(--border);
-        background: var(--cream);
-        color: var(--brown-pale);
-        font-size: 18px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s;
-        flex-shrink: 0;
-        align-self: end;
-        padding-bottom: 2px;
+        width: 34px; height: 38px; border-radius: 8px;
+        border: 1.5px solid var(--border); background: var(--cream);
+        color: var(--brown-pale); font-size: 18px; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all .2s; flex-shrink: 0; align-self: end; padding-bottom: 2px;
       }
-      .btn-remove-service:hover {
-        border-color: #c0392b;
-        color: #c0392b;
-        background: #fff5f5;
-      }
+      .btn-remove-service:hover { border-color: #c0392b; color: #c0392b; background: #fff5f5; }
 
-      /* ── Spa ear addon ─────────────────────────────────────────────── */
       .spa-ear-addon {
-        overflow: hidden;
-        max-height: 0;
-        opacity: 0;
-        transition:
-          max-height 0.3s ease,
-          opacity 0.3s ease,
-          margin 0.3s ease;
-        margin: 0;
+        overflow: hidden; max-height: 0; opacity: 0;
+        transition: max-height .3s ease, opacity .3s ease, margin .3s ease; margin: 0;
       }
-      .spa-ear-addon.visible {
-        max-height: 60px;
-        opacity: 1;
-        margin: 6px 0 6px 2px;
-      }
+      .spa-ear-addon.visible { max-height: 60px; opacity: 1; margin: 6px 0 6px 2px; }
       .spa-ear-inner {
-        display: inline-flex;
-        align-items: center;
-        gap: 9px;
-        background: var(--cream-mid);
-        border: 1.5px solid var(--border);
-        border-radius: 10px;
-        padding: 8px 14px;
-        cursor: pointer;
-        transition: all 0.2s;
-        user-select: none;
+        display: inline-flex; align-items: center; gap: 9px;
+        background: var(--cream-mid); border: 1.5px solid var(--border);
+        border-radius: 10px; padding: 8px 14px; cursor: pointer; transition: all .2s; user-select: none;
       }
-      .spa-ear-inner:hover {
-        border-color: var(--brown-pale);
-        background: var(--cream-dark);
-      }
-      .spa-ear-inner.checked {
-        border-color: var(--brown);
-        background: #f9f0ec;
-      }
+      .spa-ear-inner:hover { border-color: var(--brown-pale); background: var(--cream-dark); }
+      .spa-ear-inner.checked { border-color: var(--brown); background: #f9f0ec; }
       .spa-ear-cb {
-        width: 18px;
-        height: 18px;
-        border-radius: 5px;
-        border: 2px solid var(--brown-pale);
-        background: var(--white);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        transition: all 0.2s;
+        width: 18px; height: 18px; border-radius: 5px;
+        border: 2px solid var(--brown-pale); background: var(--white);
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0; transition: all .2s;
       }
-      .spa-ear-inner.checked .spa-ear-cb {
-        background: var(--brown);
-        border-color: var(--brown);
-      }
-      .spa-ear-check {
-        display: none;
-      }
-      .spa-ear-inner.checked .spa-ear-check {
-        display: block;
-      }
-      .spa-ear-text {
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--text-soft);
-      }
-      .spa-ear-inner.checked .spa-ear-text {
-        color: var(--brown);
-      }
-      .spa-ear-price {
-        font-size: 12px;
-        font-weight: 600;
-        background: var(--cream-dark);
-        color: var(--brown);
-        border-radius: 6px;
-        padding: 2px 8px;
-      }
+      .spa-ear-inner.checked .spa-ear-cb { background: var(--brown); border-color: var(--brown); }
+      .spa-ear-check { display: none; }
+      .spa-ear-inner.checked .spa-ear-check { display: block; }
+      .spa-ear-text { font-size: 13px; font-weight: 500; color: var(--text-soft); }
+      .spa-ear-inner.checked .spa-ear-text { color: var(--brown); }
+      .spa-ear-price { font-size: 12px; font-weight: 600; background: var(--cream-dark); color: var(--brown); border-radius: 6px; padding: 2px 8px; }
 
       .price-badge {
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--brown);
-        background: var(--cream-dark);
-        border-radius: 6px;
-        padding: 3px 8px;
-        display: inline-block;
-        margin-top: 4px;
+        font-size: 12px; font-weight: 600; color: var(--brown);
+        background: var(--cream-dark); border-radius: 6px;
+        padding: 3px 8px; display: inline-block; margin-top: 4px;
       }
 
       .btn-add-service {
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        width: 100%; padding: 9px; background: transparent;
+        border: 1.5px dashed var(--brown-pale); border-radius: 10px;
+        color: var(--brown-light); font-family: "Sarabun", sans-serif;
+        font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s; margin-bottom: 10px;
+      }
+      .btn-add-service:hover { border-color: var(--brown); background: var(--cream-mid); color: var(--brown); }
+
+      .person-subtotal {
+        display: flex; align-items: center; justify-content: space-between;
+        background: var(--cream-mid); border-radius: 8px;
+        padding: 8px 12px; margin-bottom: 10px;
+        font-size: 13px; color: var(--text-soft);
+      }
+      .person-subtotal strong { color: var(--brown); font-size: 15px; }
+
+      .grand-total-box {
+        background: var(--brown); color: var(--white);
+        border-radius: 12px; padding: 14px 18px;
+        display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+      }
+      .grand-total-box .label { font-size: 13px; opacity: .85; letter-spacing: .5px; }
+      .grand-total-box .amount { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; }
+      .grand-total-box .unit { font-size: 13px; opacity: .75; margin-left: 4px; }
+
+      .btn-primary {
+        width: 100%; padding: 15px; background: var(--brown); color: var(--white);
+        border: none; border-radius: 12px; font-family: "Sarabun", sans-serif;
+        font-size: 16px; font-weight: 600; letter-spacing: .5px; cursor: pointer;
+        transition: background .2s, transform .1s, box-shadow .2s;
+        box-shadow: 0 4px 16px rgba(107, 76, 69, .25); margin-top: 8px;
+      }
+      .btn-primary:hover { background: var(--brown-light); box-shadow: 0 6px 20px rgba(107, 76, 69, .3); }
+      .btn-primary:active { transform: scale(.98); }
+
+      #result-section { display: none; animation: fadeUp .35s ease; }
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .result-box {
+        background: var(--cream-mid); border: 1.5px solid var(--brown-pale);
+        border-radius: 12px; padding: 20px 18px;
+        font-size: 15px; line-height: 2; color: var(--text);
+        white-space: pre-wrap; word-break: break-word;
+        font-family: "Sarabun", sans-serif;
+      }
+
+      /* ── Dual copy buttons ────────────────────────────────────────── */
+      .result-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .btn-copy-sheet {
+        padding: 13px 8px;
+        background: var(--sheet-color);
+        color: var(--white);
+        border: none;
+        border-radius: 10px;
+        font-family: "Sarabun", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background .2s, opacity .2s;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 6px;
-        width: 100%;
-        padding: 9px;
-        background: transparent;
-        border: 1.5px dashed var(--brown-pale);
-        border-radius: 10px;
-        color: var(--brown-light);
-        font-family: "Sarabun", sans-serif;
-        font-size: 13px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.2s;
-        margin-bottom: 10px;
+        line-height: 1.3;
+        text-align: center;
       }
-      .btn-add-service:hover {
-        border-color: var(--brown);
-        background: var(--cream-mid);
-        color: var(--brown);
-      }
+      .btn-copy-sheet:hover { opacity: .88; }
+      .btn-copy-sheet.copied { background: var(--green); }
 
-      .person-subtotal {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: var(--cream-mid);
-        border-radius: 8px;
-        padding: 8px 12px;
-        margin-bottom: 10px;
-        font-size: 13px;
-        color: var(--text-soft);
-      }
-      .person-subtotal strong {
-        color: var(--brown);
-        font-size: 15px;
-      }
-
-      .grand-total-box {
-        background: var(--brown);
-        color: var(--white);
-        border-radius: 12px;
-        padding: 14px 18px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 14px;
-      }
-      .grand-total-box .label {
-        font-size: 13px;
-        opacity: 0.85;
-        letter-spacing: 0.5px;
-      }
-      .grand-total-box .amount {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 28px;
-        font-weight: 600;
-        letter-spacing: 1px;
-      }
-      .grand-total-box .unit {
-        font-size: 13px;
-        opacity: 0.75;
-        margin-left: 4px;
-      }
-
-      .btn-primary {
-        width: 100%;
-        padding: 15px;
-        background: var(--brown);
-        color: var(--white);
-        border: none;
-        border-radius: 12px;
-        font-family: "Sarabun", sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        cursor: pointer;
-        transition:
-          background 0.2s,
-          transform 0.1s,
-          box-shadow 0.2s;
-        box-shadow: 0 4px 16px rgba(107, 76, 69, 0.25);
-        margin-top: 8px;
-      }
-      .btn-primary:hover {
-        background: var(--brown-light);
-        box-shadow: 0 6px 20px rgba(107, 76, 69, 0.3);
-      }
-      .btn-primary:active {
-        transform: scale(0.98);
-      }
-
-      #result-section {
-        display: none;
-        animation: fadeUp 0.35s ease;
-      }
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(16px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .result-box {
-        background: var(--cream-mid);
-        border: 1.5px solid var(--brown-pale);
-        border-radius: 12px;
-        padding: 20px 18px;
-        font-size: 15px;
-        line-height: 2;
-        color: var(--text);
-        white-space: pre-wrap;
-        word-break: break-word;
-        font-family: "Sarabun", sans-serif;
-      }
-      .result-actions {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-top: 14px;
-      }
-      .btn-copy {
-        padding: 13px;
-        background: var(--brown);
+      .btn-copy-line {
+        padding: 13px 8px;
+        background: var(--line-color);
         color: var(--white);
         border: none;
         border-radius: 10px;
         font-family: "Sarabun", sans-serif;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
         cursor: pointer;
-        transition: background 0.2s;
+        transition: background .2s, opacity .2s;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 7px;
+        gap: 6px;
+        line-height: 1.3;
+        text-align: center;
       }
-      .btn-copy:hover {
-        background: var(--brown-light);
-      }
-      .btn-copy.copied {
-        background: var(--green);
-      }
+      .btn-copy-line:hover { opacity: .88; }
+      .btn-copy-line.copied { background: var(--green); }
+
       .btn-clear {
-        padding: 13px;
+        padding: 13px 8px;
         background: transparent;
         color: var(--brown-light);
         border: 1.5px solid var(--border);
         border-radius: 10px;
         font-family: "Sarabun", sans-serif;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all .2s;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 7px;
-      }
-      .btn-clear:hover {
-        border-color: var(--brown-pale);
-        background: var(--cream-dark);
-        color: var(--brown);
-      }
-
-      .divider {
+        gap: 6px;
+        line-height: 1.3;
         text-align: center;
-        margin: 6px 0 20px;
+      }
+      .btn-clear:hover { border-color: var(--brown-pale); background: var(--cream-dark); color: var(--brown); }
+
+      .divider { text-align: center; margin: 6px 0 20px; font-size: 12px; color: var(--brown-pale); letter-spacing: 1.5px; }
+
+      /* copy mode tabs */
+      .copy-mode-hint {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 12px;
         font-size: 12px;
-        color: var(--brown-pale);
-        letter-spacing: 1.5px;
+        color: var(--text-soft);
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .copy-mode-hint span {
+        background: var(--cream-dark);
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-weight: 500;
       }
 
       @media (max-width: 400px) {
-        .logo-text h1 {
-          font-size: 22px;
-        }
-        .row-2 {
-          grid-template-columns: 1fr;
-        }
-        .result-actions {
-          grid-template-columns: 1fr;
-        }
-        .service-row {
-          grid-template-columns: 1fr 1fr auto;
-        }
-        .booking-method-group {
-          gap: 6px;
-        }
-        .method-btn {
-          font-size: 12px;
-          padding: 8px 11px;
-        }
-        .deposit-btn {
-          font-size: 12px;
-          padding: 8px 12px;
-        }
+        .logo-text h1 { font-size: 22px; }
+        .row-2 { grid-template-columns: 1fr; }
+        .result-actions { grid-template-columns: 1fr; }
+        .service-row { grid-template-columns: 1fr 1fr auto; }
+        .booking-method-group { gap: 6px; }
+        .method-btn { font-size: 12px; padding: 8px 11px; }
+        .deposit-btn { font-size: 12px; padding: 8px 12px; }
       }
       @keyframes shake {
-        0%,
-        100% {
-          transform: translateX(0);
-        }
-        20% {
-          transform: translateX(-6px);
-        }
-        40% {
-          transform: translateX(6px);
-        }
-        60% {
-          transform: translateX(-4px);
-        }
-        80% {
-          transform: translateX(4px);
-        }
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-6px); }
+        40% { transform: translateX(6px); }
+        60% { transform: translateX(-4px); }
+        80% { transform: translateX(4px); }
       }
     </style>
   </head>
   <body>
     <header>
       <div class="logo-wrap">
-        <img
-          class="logo-img"
-          src="icon.png"
-          onerror="this.style.display = 'none'"
-          alt="DEETWO Logo"
-        />
+        <img class="logo-img" src="icon.png" onerror="this.style.display='none'" alt="DEETWO Logo" />
         <div class="logo-text">
           <h1>DEETWO</h1>
           <p>Thai Massage</p>
@@ -831,91 +434,45 @@
         </div>
 
         <!-- Booking method -->
-        <div class="field" style="margin-bottom: 0">
+        <div class="field" style="margin-bottom:0">
           <label>วิธีการจอง</label>
           <div class="booking-method-group" id="booking-method-group">
-            <button
-              type="button"
-              class="method-btn active"
-              data-method="โทรจอง"
-              onclick="selectMethod(this)"
-            >
+            <button type="button" class="method-btn active" data-method="โทรจอง" onclick="selectMethod(this)">
               <span class="method-icon">📞</span> โทรจอง
             </button>
-            <button
-              type="button"
-              class="method-btn"
-              data-method="walk in"
-              onclick="selectMethod(this)"
-            >
+            <button type="button" class="method-btn" data-method="walk in" onclick="selectMethod(this)">
               <span class="method-icon">🚶</span> Walk in
             </button>
-            <button
-              type="button"
-              class="method-btn method-line"
-              data-method="Line OA"
-              data-social="line"
-              onclick="selectMethod(this)"
-            >
+            <button type="button" class="method-btn method-line" data-method="Line OA" data-social="line" onclick="selectMethod(this)">
               <span class="method-icon">💬</span> Line OA
             </button>
-            <button
-              type="button"
-              class="method-btn method-fb"
-              data-method="Facebook"
-              data-social="facebook"
-              onclick="selectMethod(this)"
-            >
+            <button type="button" class="method-btn method-fb" data-method="Facebook" data-social="facebook" onclick="selectMethod(this)">
               <span class="method-icon">📘</span> Facebook
             </button>
-            <button
-              type="button"
-              class="method-btn method-ig"
-              data-method="Instagram"
-              data-social="instagram"
-              onclick="selectMethod(this)"
-            >
+            <button type="button" class="method-btn method-ig" data-method="Instagram" data-social="instagram" onclick="selectMethod(this)">
               <span class="method-icon">📷</span> Instagram
             </button>
           </div>
 
-          <!-- Social ID input -->
           <div class="social-id-field" id="social-id-field">
             <div class="social-id-inner">
-              <span class="social-id-badge" id="social-id-badge"
-                >Line ID :</span
-              >
-              <input
-                type="text"
-                id="social-id-input"
-                placeholder="กรอก ID หรือชื่อลูกค้า"
-              />
+              <span class="social-id-badge" id="social-id-badge">Line ID :</span>
+              <input type="text" id="social-id-input" placeholder="กรอก ID หรือชื่อลูกค้า" />
             </div>
           </div>
 
-          <!-- ── Deposit toggle ── -->
           <div class="deposit-label">มัดจำ</div>
           <div class="deposit-row">
-            <button
-              type="button"
-              class="deposit-btn"
-              id="dep-yes"
-              onclick="selectDeposit('yes')"
-            >
+            <button type="button" class="deposit-btn" id="dep-yes" onclick="selectDeposit('yes')">
               <span class="dep-icon">💵</span> มีมัดจำ 500 บาท
             </button>
-            <button
-              type="button"
-              class="deposit-btn"
-              id="dep-no"
-              onclick="selectDeposit('no')"
-            >
+            <button type="button" class="deposit-btn" id="dep-no" onclick="selectDeposit('no')">
               <span class="dep-icon">✕</span> ไม่มีมัดจำ
             </button>
           </div>
         </div>
 
-        <div style="margin-top: 18px" class="field" style="margin-bottom: 0">
+        <div style="margin-top:18px" class="field" style="margin-bottom:0">
           <label>จำนวนลูกค้า</label>
           <div class="person-count-row">
             <button class="count-btn" onclick="changeCount(-1)">−</button>
@@ -928,8 +485,7 @@
 
       <div id="persons-container"></div>
 
-      <!-- Grand total -->
-      <div class="grand-total-box" id="grand-total-box" style="display: none">
+      <div class="grand-total-box" id="grand-total-box" style="display:none">
         <div class="label">💰 รวมทั้งหมด</div>
         <div>
           <span class="amount" id="grand-total-amount">0</span>
@@ -937,9 +493,7 @@
         </div>
       </div>
 
-      <button class="btn-primary" onclick="generateQueue()">
-        ✦ สร้างข้อความคิว
-      </button>
+      <button class="btn-primary" onclick="generateQueue()">✦ สร้างข้อความคิว</button>
 
       <!-- Result -->
       <div id="result-section">
@@ -947,38 +501,13 @@
         <div class="card">
           <div class="section-label">ข้อความคิว</div>
           <div class="result-box" id="result-text"></div>
-          <div class="result-actions">
-            <button class="btn-copy" id="copy-btn" onclick="copyText()">
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="9" y="9" width="13" height="13" rx="2" />
-                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
-              </svg>
-              คัดลอกข้อความ
+
+          <div class="result-actions" style="grid-template-columns:1fr 1fr">
+            <button class="btn-copy-line" id="copy-line-btn" onclick="copyLine()">
+              💬 คัดลอกข้อความ
             </button>
             <button class="btn-clear" onclick="clearForm()">
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="1 4 1 10 7 10" />
-                <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
-              </svg>
-              ล้างข้อมูล
+              🔄 ล้างข้อมูล
             </button>
           </div>
         </div>
@@ -989,47 +518,32 @@
       let personCount = 1;
       let currentMethod = "โทรจอง";
       let currentSocial = null;
-      let depositStatus = null; // 'yes' | 'no' | null
-
+      let depositStatus = null;
       const personServiceCount = {};
 
+      // Store generated data for dual copy
+      let generatedData = { lineText: "", sheetText: "" };
+
       const SOCIAL_LABELS = {
-        line: {
-          badge: "Line ID :",
-          placeholder: "กรอก Line ID หรือชื่อลูกค้า",
-        },
-        facebook: {
-          badge: "Facebook :",
-          placeholder: "กรอกชื่อ Facebook ลูกค้า",
-        },
-        instagram: {
-          badge: "Instagram :",
-          placeholder: "กรอก @username ลูกค้า",
-        },
+        line:      { badge: "Line ID :",    placeholder: "กรอก Line ID หรือชื่อลูกค้า" },
+        facebook:  { badge: "Facebook :",  placeholder: "กรอกชื่อ Facebook ลูกค้า" },
+        instagram: { badge: "Instagram :", placeholder: "กรอก @username ลูกค้า" },
       };
 
-      // ── DEPOSIT ───────────────────────────────────────────────────────────────
       function selectDeposit(val) {
         depositStatus = depositStatus === val ? null : val;
-        document.getElementById("dep-yes").className =
-          "deposit-btn" + (depositStatus === "yes" ? " active-yes" : "");
-        document.getElementById("dep-no").className =
-          "deposit-btn" + (depositStatus === "no" ? " active-no" : "");
+        document.getElementById("dep-yes").className = "deposit-btn" + (depositStatus === "yes" ? " active-yes" : "");
+        document.getElementById("dep-no").className  = "deposit-btn" + (depositStatus === "no"  ? " active-no"  : "");
       }
 
-      // ── SOCIAL ────────────────────────────────────────────────────────────────
       function selectMethod(btn) {
-        document
-          .querySelectorAll(".method-btn")
-          .forEach((b) => b.classList.remove("active"));
+        document.querySelectorAll(".method-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         currentMethod = btn.dataset.method;
         currentSocial = btn.dataset.social || null;
-
         const field = document.getElementById("social-id-field");
         const badge = document.getElementById("social-id-badge");
         const input = document.getElementById("social-id-input");
-
         if (currentSocial && SOCIAL_LABELS[currentSocial]) {
           badge.textContent = SOCIAL_LABELS[currentSocial].badge;
           input.placeholder = SOCIAL_LABELS[currentSocial].placeholder;
@@ -1041,27 +555,22 @@
         }
       }
 
-      // ── PRICE TABLE ───────────────────────────────────────────────────────────
+      // ── PRICE TABLE ──────────────────────────────────────────────────────
       const PRICE_TABLE = {
-        นวดไทย: [250, 375, 500],
-        ไมเกรน: [250, 375, 500],
-        นวดฝ่าเท้า: [250, 375, 500],
-        "คอ บ่า ไหล่": [300, 450, 600],
+        "นวดไทย":                   [250, 375, 500],
+        "ไมเกรน":                   [250, 375, 500],
+        "นวดฝ่าเท้า":              [250, 375, 500],
+        "คอ บ่า ไหล่":             [300, 450, 600],
         "นวดน้ำมัน / ออยรีดเส้น": [350, 525, 700],
-        อโรม่าทองคำ: [999, 1499, 1998],
-        อโรม่า: [600, 900, 1200],
-        ขัดผิว: [null, null, 1499],
-        นวดแก้อาการ: [null, null, null],
-        ฝังสีปาก: [550, 825, 1100],
-        สปาผม: [550, 825, 1100],
-        นวดตอกเส้น: [550, 750, 999],
+        "อโรม่าทองคำ":             [999, 1499, 1998],
+        "อโรม่า":                   [600, 900, 1200],
+        "ขัดผิว":                   [null, null, 1499],
+        "นวดแก้อาการ":             [null, null, null],
+        "ฝังสีปาก":                [550, 825, 1100],
+        "สปาผม":                    [550, 825, 1100],
+        "นวดตอกเส้น":              [550, 750, 999],
       };
-
-      const DUR_IDX = {
-        "1 ชั่วโมง": 0,
-        "1 ชั่วโมง 30 นาที": 1,
-        "2 ชั่วโมง": 2,
-      };
+      const DUR_IDX = { "1 ชั่วโมง": 0, "1 ชั่วโมง 30 นาที": 1, "2 ชั่วโมง": 2 };
 
       function getPrice(service, duration) {
         const row = PRICE_TABLE[service];
@@ -1071,49 +580,32 @@
         return row[idx];
       }
 
-      // ── SERVICES THAT TRIGGER SPA EAR ADDON ───────────────────────────────────
       const SPA_EAR_TRIGGER = new Set(["สปาผม"]);
       const SPA_EAR_PRICE = 300;
 
       const SERVICES = [
-        "นวดไทย",
-        "ไมเกรน",
-        "คอ บ่า ไหล่",
-        "อโรม่า",
-        "อโรม่าทองคำ",
-        "นวดน้ำมัน / ออยรีดเส้น",
-        "สปาผม",
-        "ฝังสีปาก",
-        "สปาผม + มาร์คหน้า+สปาหู",
-        "BB glow",
-        "นวดฝ่าเท้า",
-        "ขัดผิว",
-        "นวดแก้อาการ",
-        "นวดตอกเส้น",
+        "นวดไทย","ไมเกรน","คอ บ่า ไหล่","อโรม่า","อโรม่าทองคำ",
+        "นวดน้ำมัน / ออยรีดเส้น","สปาผม","ฝังสีปาก","สปาผม + มาร์คหน้า+สปาหู",
+        "BB glow","นวดฝ่าเท้า","ขัดผิว","นวดแก้อาการ","นวดตอกเส้น",
         "เลือกนวดเอง หน้าร้าน🔴",
       ];
       const DURATIONS = [
-        { val: "", label: "— ไม่ระบุ —" },
-        { val: "30 นาที", label: "30 นาที" },
-        { val: "1 ชั่วโมง", label: "1 ชั่วโมง" },
-        { val: "1 ชั่วโมง 30 นาที", label: "1 ชั่วโมง 30 นาที" },
-        { val: "2 ชั่วโมง", label: "2 ชั่วโมง" },
-        { val: "3 ชั่วโมง", label: "3 ชั่วโมง" },
+        { val: "",                    label: "— ไม่ระบุ —" },
+        { val: "30 นาที",             label: "30 นาที" },
+        { val: "1 ชั่วโมง",          label: "1 ชั่วโมง" },
+        { val: "1 ชั่วโมง 30 นาที",  label: "1 ชั่วโมง 30 นาที" },
+        { val: "2 ชั่วโมง",          label: "2 ชั่วโมง" },
+        { val: "3 ชั่วโมง",          label: "3 ชั่วโมง" },
       ];
 
-      const svcOpts = () =>
-        SERVICES.map((s) => `<option value="${s}">${s}</option>`).join("");
-      const durOpts = () =>
-        DURATIONS.map(
-          (d) => `<option value="${d.val}">${d.label}</option>`,
-        ).join("");
+      const svcOpts = () => SERVICES.map(s => `<option value="${s}">${s}</option>`).join("");
+      const durOpts = () => DURATIONS.map(d => `<option value="${d.val}">${d.label}</option>`).join("");
 
       function buildServiceRow(personIdx, rowIdx) {
         const isFirst = rowIdx === 1;
-        const removeBtn = isFirst
-          ? ""
-          : `<button class="btn-remove-service" title="ลบบริการ"
-         onclick="removeServiceRow(${personIdx}, ${rowIdx})">×</button>`;
+        const removeBtn = isFirst ? "" :
+          `<button class="btn-remove-service" title="ลบบริการ"
+             onclick="removeServiceRow(${personIdx},${rowIdx})">×</button>`;
         return `
 <div class="service-row-wrap" id="svcwrap-${personIdx}-${rowIdx}">
   <div class="service-row" id="svcrow-${personIdx}-${rowIdx}">
@@ -1135,7 +627,6 @@
     ${removeBtn}
   </div>
   <div id="pricebadge-${personIdx}-${rowIdx}"></div>
-  <!-- Spa ear addon -->
   <div class="spa-ear-addon" id="spaear-${personIdx}-${rowIdx}">
     <div class="spa-ear-inner" id="spaear-inner-${personIdx}-${rowIdx}"
          onclick="toggleSpaEar(${personIdx},${rowIdx})">
@@ -1152,51 +643,34 @@
       }
 
       function checkSpaEar(personIdx, rowIdx) {
-        const svc =
-          document.getElementById(`service-${personIdx}-${rowIdx}`)?.value ||
-          "";
-        const addonEl = document.getElementById(
-          `spaear-${personIdx}-${rowIdx}`,
-        );
+        const svc = document.getElementById(`service-${personIdx}-${rowIdx}`)?.value || "";
+        const addonEl = document.getElementById(`spaear-${personIdx}-${rowIdx}`);
         if (!addonEl) return;
         if (SPA_EAR_TRIGGER.has(svc)) {
           addonEl.classList.add("visible");
         } else {
           addonEl.classList.remove("visible");
-          // uncheck if hidden
-          const inner = document.getElementById(
-            `spaear-inner-${personIdx}-${rowIdx}`,
-          );
+          const inner = document.getElementById(`spaear-inner-${personIdx}-${rowIdx}`);
           if (inner) inner.classList.remove("checked");
         }
       }
 
       function toggleSpaEar(personIdx, rowIdx) {
-        const inner = document.getElementById(
-          `spaear-inner-${personIdx}-${rowIdx}`,
-        );
+        const inner = document.getElementById(`spaear-inner-${personIdx}-${rowIdx}`);
         if (!inner) return;
         inner.classList.toggle("checked");
         updateGrandTotal();
       }
 
       function isSpaEarChecked(personIdx, rowIdx) {
-        const inner = document.getElementById(
-          `spaear-inner-${personIdx}-${rowIdx}`,
-        );
+        const inner = document.getElementById(`spaear-inner-${personIdx}-${rowIdx}`);
         return inner ? inner.classList.contains("checked") : false;
       }
 
       function updatePriceDisplay(personIdx, rowIdx) {
-        const svc =
-          document.getElementById(`service-${personIdx}-${rowIdx}`)?.value ||
-          "";
-        const dur =
-          document.getElementById(`duration-${personIdx}-${rowIdx}`)?.value ||
-          "";
-        const badge = document.getElementById(
-          `pricebadge-${personIdx}-${rowIdx}`,
-        );
+        const svc = document.getElementById(`service-${personIdx}-${rowIdx}`)?.value || "";
+        const dur = document.getElementById(`duration-${personIdx}-${rowIdx}`)?.value || "";
+        const badge = document.getElementById(`pricebadge-${personIdx}-${rowIdx}`);
         if (!badge) return;
         const price = getPrice(svc, dur);
         if (price !== null && price !== undefined && svc && dur) {
@@ -1207,14 +681,10 @@
       }
 
       function addServiceRow(personIdx) {
-        personServiceCount[personIdx] =
-          (personServiceCount[personIdx] || 1) + 1;
+        personServiceCount[personIdx] = (personServiceCount[personIdx] || 1) + 1;
         const rowIdx = personServiceCount[personIdx];
         const container = document.getElementById(`svc-container-${personIdx}`);
-        container.insertAdjacentHTML(
-          "beforeend",
-          buildServiceRow(personIdx, rowIdx),
-        );
+        container.insertAdjacentHTML("beforeend", buildServiceRow(personIdx, rowIdx));
       }
 
       function removeServiceRow(personIdx, rowIdx) {
@@ -1226,8 +696,7 @@
         personServiceCount[i] = 1;
         const isFirst = i === 1;
         const title = isFirst ? "ผู้จอง (ท่านที่ 1)" : `ลูกค้าท่านที่ ${i}`;
-        const namePhoneHTML = isFirst
-          ? `
+        const namePhoneHTML = isFirst ? `
       <div class="row-2">
         <div class="field">
           <label>ชื่อผู้จอง <span class="req">*</span></label>
@@ -1237,8 +706,7 @@
           <label>เบอร์โทร <span class="req">*</span></label>
           <input type="tel" id="phone-1" placeholder="0xx-xxx-xxxx">
         </div>
-      </div>`
-          : "";
+      </div>` : "";
         return `
 <div class="person-card" id="person-${i}">
   <div class="person-card-header">
@@ -1254,12 +722,14 @@
     <strong id="subtotal-amount-${i}">0 บาท</strong>
   </div>
   <button class="btn-add-service" onclick="addServiceRow(${i})">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+    </svg>
     เพิ่มบริการ
   </button>
   <div class="field" style="margin-bottom:0">
     <label>หมายเหตุ</label>
-    <textarea id="note-${i}"></textarea>
+    <textarea id="note-${i}" placeholder="หมายเหตุเพิ่มเติม เช่น แพ้น้ำมัน, ต้องการห้องส่วนตัว"></textarea>
   </div>
 </div>`;
       }
@@ -1271,67 +741,50 @@
           const el = document.getElementById(`service-${i}-${r}`);
           if (!el) continue;
           const svc = el.value;
-          const dur =
-            document.getElementById(`duration-${i}-${r}`)?.value || "";
+          const dur = document.getElementById(`duration-${i}-${r}`)?.value || "";
           const spaEar = isSpaEarChecked(i, r);
-          if (svc)
-            services.push({ service: svc, duration: dur, spaEar, rowIdx: r });
+          if (svc) services.push({ service: svc, duration: dur, spaEar, rowIdx: r });
         }
         return services;
       }
 
       function computePersonTotal(services) {
-        let total = 0;
-        let hasPrice = false;
+        let total = 0; let hasPrice = false;
         services.forEach(({ service, duration, spaEar }) => {
           const p = getPrice(service, duration);
-          if (p !== null && p !== undefined) {
-            total += p;
-            hasPrice = true;
-          }
-          if (spaEar) {
-            total += SPA_EAR_PRICE;
-            hasPrice = true;
-          }
+          if (p !== null && p !== undefined) { total += p; hasPrice = true; }
+          if (spaEar) { total += SPA_EAR_PRICE; hasPrice = true; }
         });
         return hasPrice ? total : null;
       }
 
       function updateGrandTotal() {
-        let grandTotal = 0;
-        let anyPrice = false;
+        let grandTotal = 0; let anyPrice = false;
         for (let i = 1; i <= personCount; i++) {
           const svcs = collectPersonServices(i);
           const pt = computePersonTotal(svcs);
           const subtotalBox = document.getElementById(`subtotal-${i}`);
           const subtotalAmt = document.getElementById(`subtotal-amount-${i}`);
           if (pt !== null && pt > 0) {
-            grandTotal += pt;
-            anyPrice = true;
+            grandTotal += pt; anyPrice = true;
             if (subtotalBox) subtotalBox.style.display = "flex";
-            if (subtotalAmt)
-              subtotalAmt.textContent = pt.toLocaleString() + " บาท";
+            if (subtotalAmt) subtotalAmt.textContent = pt.toLocaleString() + " บาท";
           } else {
             if (subtotalBox) subtotalBox.style.display = "none";
           }
         }
         const box = document.getElementById("grand-total-box");
         const amt = document.getElementById("grand-total-amount");
-        if (anyPrice) {
-          box.style.display = "flex";
-          amt.textContent = grandTotal.toLocaleString();
-        } else {
-          box.style.display = "none";
-        }
+        if (anyPrice) { box.style.display = "flex"; amt.textContent = grandTotal.toLocaleString(); }
+        else { box.style.display = "none"; }
       }
 
       function saveValues() {
         const saved = [];
         for (let i = 1; i <= personCount; i++) {
           saved.push({
-            name: i === 1 ? document.getElementById("name-1")?.value || "" : "",
-            phone:
-              i === 1 ? document.getElementById("phone-1")?.value || "" : "",
+            name:  i === 1 ? document.getElementById("name-1")?.value  || "" : "",
+            phone: i === 1 ? document.getElementById("phone-1")?.value || "" : "",
             services: collectPersonServices(i),
             note: document.getElementById(`note-${i}`)?.value || "",
             svcCount: personServiceCount[i] || 1,
@@ -1347,10 +800,8 @@
           container.insertAdjacentHTML("beforeend", buildPersonCard(i));
           const s = saved[i - 1];
           if (s) {
-            if (i === 1 && s.name)
-              document.getElementById("name-1").value = s.name;
-            if (i === 1 && s.phone)
-              document.getElementById("phone-1").value = s.phone;
+            if (i === 1 && s.name)  document.getElementById("name-1").value  = s.name;
+            if (i === 1 && s.phone) document.getElementById("phone-1").value = s.phone;
             if (s.services && s.services.length > 1) {
               for (let r = 2; r <= s.services.length; r++) addServiceRow(i);
             }
@@ -1358,16 +809,11 @@
               const rowIdx = ri + 1;
               const selEl = document.getElementById(`service-${i}-${rowIdx}`);
               const durEl = document.getElementById(`duration-${i}-${rowIdx}`);
-              if (selEl && sv.service) {
-                selEl.value = sv.service;
-                checkSpaEar(i, rowIdx);
-              }
+              if (selEl && sv.service) { selEl.value = sv.service; checkSpaEar(i, rowIdx); }
               if (durEl && sv.duration) durEl.value = sv.duration;
               updatePriceDisplay(i, rowIdx);
               if (sv.spaEar) {
-                const inner = document.getElementById(
-                  `spaear-inner-${i}-${rowIdx}`,
-                );
+                const inner = document.getElementById(`spaear-inner-${i}-${rowIdx}`);
                 if (inner) inner.classList.add("checked");
               }
             });
@@ -1383,77 +829,40 @@
         const saved = saveValues();
         personCount = next;
         document.getElementById("count-display").textContent = personCount;
-        document.getElementById("count-label").textContent =
-          personCount + " ท่าน";
+        document.getElementById("count-label").textContent = personCount + " ท่าน";
         renderPersonCards(saved);
         document.getElementById("result-section").style.display = "none";
       }
 
-      document.getElementById("date").value = new Date()
-        .toISOString()
-        .split("T")[0];
+      document.getElementById("date").value = new Date().toISOString().split("T")[0];
       renderPersonCards();
 
       function formatDate(s) {
         if (!s) return "—";
         const d = new Date(s + "T00:00:00");
-        const days = [
-          "อาทิตย์",
-          "จันทร์",
-          "อังคาร",
-          "พุธ",
-          "พฤหัสบดี",
-          "ศุกร์",
-          "เสาร์",
-        ];
-        const mon = [
-          "ม.ค.",
-          "ก.พ.",
-          "มี.ค.",
-          "เม.ย.",
-          "พ.ค.",
-          "มิ.ย.",
-          "ก.ค.",
-          "ส.ค.",
-          "ก.ย.",
-          "ต.ค.",
-          "พ.ย.",
-          "ธ.ค.",
-        ];
+        const days = ["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์"];
+        const mon  = ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
         return `${d.getDate()} ${mon[d.getMonth()]} ${d.getFullYear() + 543} (${days[d.getDay()]})`;
       }
-      function formatTime(t) {
-        return t ? t + " น." : "—";
-      }
+      function formatTime(t) { return t ? t + " น." : "—"; }
 
-      const SOCIAL_ICONS = { line: "💬", facebook: "📘", instagram: "📷" };
-
+      // ─────────────────────────────────────────────────────────────────────────
+      // GENERATE
+      // ─────────────────────────────────────────────────────────────────────────
       function generateQueue() {
-        const date = document.getElementById("date").value;
-        const time = document.getElementById("time").value;
+        const date   = document.getElementById("date").value;
+        const time   = document.getElementById("time").value;
         const branch = document.getElementById("branch").value;
-        if (!date || !time || !branch) {
-          shakeBtn();
-          alert("⚠️ กรุณากรอกวันที่, เวลา และสาขา");
-          return;
-        }
+        if (!date || !time || !branch) { shakeBtn(); alert("⚠️ กรุณากรอกวันที่, เวลา และสาขา"); return; }
 
-        const name = document.getElementById("name-1").value.trim();
+        const name  = document.getElementById("name-1").value.trim();
         const phone = document.getElementById("phone-1").value.trim();
-        if (!name || !phone) {
-          shakeBtn();
-          alert("⚠️ กรุณากรอกชื่อและเบอร์โทรผู้จอง");
-          return;
-        }
+        if (!name || !phone) { shakeBtn(); alert("⚠️ กรุณากรอกชื่อและเบอร์โทรผู้จอง"); return; }
 
-        const socialId = document
-          .getElementById("social-id-input")
-          .value.trim();
+        const socialId = document.getElementById("social-id-input").value.trim();
         if (currentSocial && !socialId) {
           shakeBtn();
-          alert(
-            `⚠️ กรุณากรอก ${SOCIAL_LABELS[currentSocial].badge.replace(" :", "")} ของลูกค้า`,
-          );
+          alert(`⚠️ กรุณากรอก ${SOCIAL_LABELS[currentSocial].badge.replace(" :", "")} ของลูกค้า`);
           return;
         }
 
@@ -1461,125 +870,166 @@
         for (let i = 1; i <= personCount; i++) {
           const svcs = collectPersonServices(i);
           if (!svcs.length || !svcs[0].service) {
-            shakeBtn();
-            alert(`⚠️ กรุณาเลือกบริการของลูกค้าท่านที่ ${i}`);
-            return;
+            shakeBtn(); alert(`⚠️ กรุณาเลือกบริการของลูกค้าท่านที่ ${i}`); return;
           }
           const note = document.getElementById(`note-${i}`)?.value.trim() || "";
-          persons.push({ services: svcs, note });
+          const total = computePersonTotal(svcs);
+          persons.push({ services: svcs, note, total });
         }
 
-        const lines = [];
+        // ── Build LINE version (ชิดซ้าย, อ่านง่าย) ─────────────────────────
+        const lineLines = [];
 
+        // Header — วิธีจอง
+        if (currentSocial && socialId) {
+          const lbl = SOCIAL_LABELS[currentSocial].badge;
+          lineLines.push(`ลูกค้า ${lbl} ${socialId}`);
+        } else {
+          const icon = currentMethod === "โทรจอง" ? "📞" : "🚶";
+          lineLines.push(`ลูกค้า : ${icon} ${currentMethod}`);
+        }
 
-                if (currentSocial && socialId) {
-                  const lbl = SOCIAL_LABELS[currentSocial].badge;
-                  lines.push(`ลูกค้า ${lbl}  ${socialId}`);
-                } else {
-                  const methodIcon = currentMethod === "โทรจอง"
-                    ? "📞"
-                    : "🚶";
+        lineLines.push(`ชื่อจอง : คุณ${name}`);
+        lineLines.push(`เบอร์โทรศัพท์ : ${phone}`);
+        lineLines.push(`จำนวน : ${personCount} ท่าน`);
+        lineLines.push("");
+        lineLines.push(`📍 สาขา : ${branch}`);
+        lineLines.push(`วันที่ : ${formatDate(date)}`);
+        lineLines.push(`เวลา : ${formatTime(time)}`);
+        lineLines.push("");
 
-                  lines.push(`ลูกค้า : ${methodIcon} ${currentMethod}`);
-                }
-
-        lines.push(`ชื่อจอง : ${name}`);
-        lines.push(`เบอร์โทรศัพท์ : ${phone}`);
-        lines.push(`จำนวน : ${personCount} ท่าน`);
-        lines.push("");
-
-        lines.push(`📍 สาขา : ${branch}`);
-        lines.push(`วันที่ : ${formatDate(date)}`);
-        lines.push(`เวลา : ${formatTime(time)}`);
-
-        // รวมบริการ
-        let allServices = [];
-
-        persons.forEach((p) => {
-          p.services.forEach((sv) => {
-            let row = `${sv.service}`;
-            if (sv.duration) row += ` ${sv.duration}`;
-            if (sv.spaEar) row += ` + สปาหู`;
-            allServices.push(row);
+        // Per-person services
+        persons.forEach((p, idx) => {
+          const label = personCount > 1 ? `ท่านที่ ${idx + 1}` : "บริการ";
+          const svcLines = p.services.map(sv => {
+            let s = sv.service;
+            if (sv.duration) s += ` ${sv.duration}`;
+            if (sv.spaEar) s += ` + สปาหู`;
+            return s;
           });
+          lineLines.push(`${label} : ${svcLines.join(", ")}`);
+
+          // Note per person
+          if (p.note) {
+            lineLines.push(`└ หมายเหตุ : ${p.note}`);
+          }
         });
 
-        if (allServices.length > 0) {
-          lines.push(`บริการ : ${allServices.join(", ")}`);
-        }
+        lineLines.push("");
 
-        // มัดจำ
+        // Deposit
         if (depositStatus === "yes") {
-          lines.push(`☑️ ยอดมัดจำ : 500`);
-        } else {
-          lines.push(`❌ ไม่มีมัดจำ`);
+          lineLines.push(`☑️ ยอดมัดจำ : 500 บาท`);
+        } else if (depositStatus === "no") {
+          lineLines.push(`❌ ไม่มีมัดจำ`);
         }
 
-        document.getElementById("result-text").textContent = lines.join("\n");
+        const lineText = lineLines.join("\n");
+
+        // ── Build Sheet version (Tab-separated columns) ──────────────────────
+        // Columns: วันที่ | เวลา | สาขา | ชื่อ | เบอร์ | วิธีจอง | จำนวน | บริการ (ต่อท่าน) | ราคารวม | มัดจำ | หมายเหตุ
+
+        const methodStr = currentSocial && socialId
+          ? `${SOCIAL_LABELS[currentSocial].badge.replace(" :", "")} : ${socialId}`
+          : currentMethod;
+
+        // Build service summary per person for sheet
+        const svcSummaryParts = persons.map((p, idx) => {
+          const label = personCount > 1 ? `ท่าน${idx + 1}: ` : "";
+          const svcStr = p.services.map(sv => {
+            let s = sv.service;
+            if (sv.duration) s += ` ${sv.duration}`;
+            if (sv.spaEar) s += `+สปาหู`;
+            return s;
+          }).join(" / ");
+          return label + svcStr;
+        });
+        const svcSummary = svcSummaryParts.join(" | ");
+
+        const noteSummary = persons
+          .map((p, idx) => {
+            if (!p.note) return "";
+            return personCount > 1 ? `ท่าน${idx + 1}: ${p.note}` : p.note;
+          })
+          .filter(Boolean).join(", ") || "-";
+
+        const depositStr = depositStatus === "yes" ? "มัดจำ 500" : depositStatus === "no" ? "ไม่มีมัดจำ" : "-";
+
+        const sheetRow = [
+          formatDate(date),
+          formatTime(time),
+          branch,
+          `คุณ${name}`,
+          phone,
+          methodStr,
+          `${personCount} ท่าน`,
+          svcSummary,
+          depositStr,
+          noteSummary,
+        ].join("\t");
+
+        // Header row for reference
+        const sheetHeader = [
+          "วันที่","เวลา","สาขา","ชื่อจอง","เบอร์โทร","วิธีจอง","จำนวน","บริการ","มัดจำ","หมายเหตุ"
+        ].join("\t");
+
+        const sheetText = sheetHeader + "\n" + sheetRow;
+
+        // ── Store & display ──────────────────────────────────────────────────
+        generatedData = { lineText, sheetText };
+
+        document.getElementById("result-text").textContent = lineText;
         const section = document.getElementById("result-section");
         section.style.display = "block";
-        resetCopyBtn();
-        setTimeout(
-          () => section.scrollIntoView({ behavior: "smooth", block: "start" }),
-          50,
-        );
+        resetCopyBtns();
+        setTimeout(() => section.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
       }
 
-      const COPY_SVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>`;
-      const CHECK_SVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
-
-      function copyText() {
-        const text = document.getElementById("result-text").textContent;
-        const btn = document.getElementById("copy-btn");
-        const ok = () => {
-          btn.classList.add("copied");
-          btn.innerHTML = CHECK_SVG + " คัดลอกแล้ว!";
-          setTimeout(() => {
-            btn.classList.remove("copied");
-            btn.innerHTML = COPY_SVG + " คัดลอกข้อความ";
-          }, 2500);
-        };
-        navigator.clipboard
-          .writeText(text)
-          .then(ok)
-          .catch(() => {
-            const el = document.createElement("textarea");
-            el.value = text;
-            el.style.cssText = "position:fixed;opacity:0";
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand("copy");
-            document.body.removeChild(el);
-            ok();
-          });
+      // ── COPY FUNCTIONS ────────────────────────────────────────────────────────
+      function doFeedback(btnId, newLabel) {
+        const btn = document.getElementById(btnId);
+        btn.classList.add("copied");
+        const orig = btn.innerHTML;
+        btn.innerHTML = "✓ คัดลอกแล้ว!";
+        setTimeout(() => {
+          btn.classList.remove("copied");
+          btn.innerHTML = orig;
+        }, 2500);
       }
 
-      function resetCopyBtn() {
-        const btn = document.getElementById("copy-btn");
-        btn.classList.remove("copied");
-        btn.innerHTML = COPY_SVG + " คัดลอกข้อความ";
+      function copyToClipboard(text, btnId) {
+        navigator.clipboard.writeText(text).then(() => doFeedback(btnId)).catch(() => {
+          const el = document.createElement("textarea");
+          el.value = text;
+          el.style.cssText = "position:fixed;opacity:0";
+          document.body.appendChild(el);
+          el.select();
+          document.execCommand("copy");
+          document.body.removeChild(el);
+          doFeedback(btnId);
+        });
+      }
+
+      function copySheet() { copyToClipboard(generatedData.sheetText, "copy-sheet-btn"); }
+      function copyLine()  { copyToClipboard(generatedData.lineText,  "copy-line-btn"); }
+
+      function resetCopyBtns() {
+        document.getElementById("copy-sheet-btn").classList.remove("copied");
+        document.getElementById("copy-line-btn").classList.remove("copied");
       }
 
       function clearForm() {
-        document.getElementById("date").value = new Date()
-          .toISOString()
-          .split("T")[0];
-        document.getElementById("time").value = "";
+        document.getElementById("date").value  = new Date().toISOString().split("T")[0];
+        document.getElementById("time").value  = "";
         document.getElementById("branch").value = "";
-        document
-          .querySelectorAll(".method-btn")
-          .forEach((b) => b.classList.remove("active"));
-        document
-          .querySelector('[data-method="โทรจอง"]')
-          .classList.add("active");
-        currentMethod = "โทรจอง";
-        currentSocial = null;
+        document.querySelectorAll(".method-btn").forEach(b => b.classList.remove("active"));
+        document.querySelector('[data-method="โทรจอง"]').classList.add("active");
+        currentMethod = "โทรจอง"; currentSocial = null;
         document.getElementById("social-id-field").classList.remove("visible");
         document.getElementById("social-id-input").value = "";
-        // reset deposit
         depositStatus = null;
         document.getElementById("dep-yes").className = "deposit-btn";
-        document.getElementById("dep-no").className = "deposit-btn";
+        document.getElementById("dep-no").className  = "deposit-btn";
         personCount = 1;
         document.getElementById("count-display").textContent = "1";
         document.getElementById("count-label").textContent = "1 ท่าน";
