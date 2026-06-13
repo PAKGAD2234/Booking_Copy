@@ -34,6 +34,7 @@
         --fb-color: #1877f2;
         --ig-color: #c13584;
         --sheet-color: #1a73e8;
+        --customer-color: #7c5c9e;
       }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body {
@@ -280,6 +281,52 @@
         from { opacity: 0; transform: translateY(16px); }
         to { opacity: 1; transform: translateY(0); }
       }
+
+      /* ── Tab switcher ─────────────────────────────────────────────── */
+      .result-tabs {
+        display: flex;
+        gap: 0;
+        margin-bottom: 0;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+        border: 1.5px solid var(--border);
+        border-bottom: none;
+      }
+      .result-tab {
+        flex: 1;
+        padding: 11px 8px;
+        background: var(--cream-mid);
+        border: none;
+        font-family: "Sarabun", sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-soft);
+        cursor: pointer;
+        transition: all .2s;
+        text-align: center;
+        line-height: 1.3;
+      }
+      .result-tab:not(:last-child) { border-right: 1.5px solid var(--border); }
+      .result-tab.active {
+        background: var(--white);
+        color: var(--brown);
+        font-weight: 600;
+      }
+      .result-tab.tab-staff.active { border-bottom: 3px solid var(--brown); }
+      .result-tab.tab-customer.active { border-bottom: 3px solid var(--customer-color); }
+
+      /* ── Result panels ───────────────────────────────────────────── */
+      .result-panel {
+        display: none;
+        background: var(--white);
+        border: 1.5px solid var(--border);
+        border-top: none;
+        border-radius: 0 0 var(--radius) var(--radius);
+        padding: 20px 18px 18px;
+        box-shadow: var(--shadow);
+      }
+      .result-panel.active { display: block; animation: fadeUp .25s ease; }
+
       .result-box {
         background: var(--cream-mid); border: 1.5px solid var(--brown-pale);
         border-radius: 12px; padding: 20px 18px;
@@ -287,35 +334,18 @@
         white-space: pre-wrap; word-break: break-word;
         font-family: "Sarabun", sans-serif;
       }
+      .result-box.customer-box {
+        border-color: #c4a8d8;
+        background: #faf5ff;
+        line-height: 1.9;
+      }
 
-      /* ── Dual copy buttons ────────────────────────────────────────── */
       .result-actions {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 10px;
         margin-top: 14px;
       }
-      .btn-copy-sheet {
-        padding: 13px 8px;
-        background: var(--sheet-color);
-        color: var(--white);
-        border: none;
-        border-radius: 10px;
-        font-family: "Sarabun", sans-serif;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background .2s, opacity .2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        line-height: 1.3;
-        text-align: center;
-      }
-      .btn-copy-sheet:hover { opacity: .88; }
-      .btn-copy-sheet.copied { background: var(--green); }
-
       .btn-copy-line {
         padding: 13px 8px;
         background: var(--line-color);
@@ -336,6 +366,27 @@
       }
       .btn-copy-line:hover { opacity: .88; }
       .btn-copy-line.copied { background: var(--green); }
+
+      .btn-copy-customer {
+        padding: 13px 8px;
+        background: var(--customer-color);
+        color: var(--white);
+        border: none;
+        border-radius: 10px;
+        font-family: "Sarabun", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background .2s, opacity .2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        line-height: 1.3;
+        text-align: center;
+      }
+      .btn-copy-customer:hover { opacity: .88; }
+      .btn-copy-customer.copied { background: var(--green); }
 
       .btn-clear {
         padding: 13px 8px;
@@ -359,23 +410,6 @@
 
       .divider { text-align: center; margin: 6px 0 20px; font-size: 12px; color: var(--brown-pale); letter-spacing: 1.5px; }
 
-      /* copy mode tabs */
-      .copy-mode-hint {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 12px;
-        font-size: 12px;
-        color: var(--text-soft);
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      .copy-mode-hint span {
-        background: var(--cream-dark);
-        border-radius: 6px;
-        padding: 3px 10px;
-        font-weight: 500;
-      }
-
       @media (max-width: 400px) {
         .logo-text h1 { font-size: 22px; }
         .row-2 { grid-template-columns: 1fr; }
@@ -384,6 +418,7 @@
         .booking-method-group { gap: 6px; }
         .method-btn { font-size: 12px; padding: 8px 11px; }
         .deposit-btn { font-size: 12px; padding: 8px 12px; }
+        .result-tab { font-size: 12px; padding: 10px 6px; }
       }
       @keyframes shake {
         0%, 100% { transform: translateX(0); }
@@ -498,13 +533,36 @@
       <!-- Result -->
       <div id="result-section">
         <div class="divider">• • •</div>
-        <div class="card">
-          <div class="section-label">ข้อความคิว</div>
-          <div class="result-box" id="result-text"></div>
 
-          <div class="result-actions" style="grid-template-columns:1fr 1fr">
+        <!-- Tab switcher -->
+        <div class="result-tabs">
+          <button class="result-tab tab-staff active" onclick="switchTab('staff')">
+            📋 ข้อความสำหรับร้าน
+          </button>
+          <button class="result-tab tab-customer" onclick="switchTab('customer')">
+            💜 ข้อความสำหรับลูกค้า
+          </button>
+        </div>
+
+        <!-- Staff panel -->
+        <div class="result-panel active" id="panel-staff">
+          <div class="result-box" id="result-text"></div>
+          <div class="result-actions">
             <button class="btn-copy-line" id="copy-line-btn" onclick="copyLine()">
               💬 คัดลอกข้อความ
+            </button>
+            <button class="btn-clear" onclick="clearForm()">
+              🔄 ล้างข้อมูล
+            </button>
+          </div>
+        </div>
+
+        <!-- Customer panel -->
+        <div class="result-panel" id="panel-customer">
+          <div class="result-box customer-box" id="result-customer-text"></div>
+          <div class="result-actions">
+            <button class="btn-copy-customer" id="copy-customer-btn" onclick="copyCustomer()">
+              💜 คัดลอกส่งลูกค้า
             </button>
             <button class="btn-clear" onclick="clearForm()">
               🔄 ล้างข้อมูล
@@ -521,8 +579,7 @@
       let depositStatus = null;
       const personServiceCount = {};
 
-      // Store generated data for dual copy
-      let generatedData = { lineText: "", sheetText: "" };
+      let generatedData = { lineText: "", customerText: "" };
 
       const SOCIAL_LABELS = {
         line:      { badge: "Line ID :",    placeholder: "กรอก Line ID หรือชื่อลูกค้า" },
@@ -555,22 +612,33 @@
         }
       }
 
+      // ── Tab switcher ─────────────────────────────────────────────────────
+      function switchTab(tab) {
+        document.querySelectorAll(".result-tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".result-panel").forEach(p => p.classList.remove("active"));
+        document.querySelector(`.tab-${tab}`).classList.add("active");
+        document.getElementById(`panel-${tab}`).classList.add("active");
+      }
+
       // ── PRICE TABLE ──────────────────────────────────────────────────────
       const PRICE_TABLE = {
         "นวดไทย":                   [250, 375, 500],
-        "ไมเกรน":                   [250, 375, 500],
-        "นวดฝ่าเท้า":              [250, 375, 500],
-        "คอ บ่า ไหล่":             [300, 450, 600],
-        "นวดน้ำมัน / ออยรีดเส้น": [350, 525, 700],
-        "อโรม่าทองคำ":             [999, 1499, 1998],
-        "อโรม่า":                   [600, 900, 1200],
-        "ขัดผิว":                   [null, null, 1499],
-        "นวดแก้อาการ":             [null, null, null],
-        "ฝังสีปาก":                [550, 825, 1100],
-        "สปาผม":                    [550, 825, 1100],
-        "นวดตอกเส้น":              [550, 750, 999],
+        "นวดฝ่าเท้า":               [250, 375, 500],
+        "นวดไมเกรน/ศรีษะ":          [250, 375, 500],
+        "นวด คอ บ่า ไหล่":          [300, 450, 600],
+        "นวดน้ำมัน / ออยรีดเส้น":   [350, 525, 700],
+        "อโรม่าทองคำ(Hot oil)":      [999, 1499, 1998],
+        "นวดอโรม่า":                [600, 900, 1200],
+        "ขัดผิว":                   [999, null, null],
+        "ขัดผิว+นวดอโรม่า":         [null, null, 1499],
+        "นวดแก้อาการ":              [null, null, null],
+        "ฝังสีปาก":                 [null, null, null],
+        "ฝังสีคิ้ว":                [null, null, null],
+        "สปาผมเวียดนาม":            [550, 825, 1100],
+        "สปาผมเวียดนาม+สปาหู+มาร์กหน้า": [null, 850, null],
+        "นวดโปร 999":               [null, null, null],
       };
-      const DUR_IDX = { "1 ชั่วโมง": 0, "1 ชั่วโมง 30 นาที": 1, "2 ชั่วโมง": 2 };
+      const DUR_IDX = { "1 ชั่วโมง": 0, "1 ชั่วโมง 30 นาที": 1, "2 ชั่วโมง": 2, "3 ชั่วโมง": 3 };
 
       function getPrice(service, duration) {
         const row = PRICE_TABLE[service];
@@ -584,9 +652,9 @@
       const SPA_EAR_PRICE = 300;
 
       const SERVICES = [
-        "นวดไทย","ไมเกรน","คอ บ่า ไหล่","อโรม่า","อโรม่าทองคำ",
-        "นวดน้ำมัน / ออยรีดเส้น","สปาผม","ฝังสีปาก","สปาผม + มาร์คหน้า+สปาหู",
-        "BB glow","นวดฝ่าเท้า","ขัดผิว","นวดแก้อาการ","นวดตอกเส้น",
+        "นวดไทย","นวดไมเกรน/ศรีษะ","นวดฝ่าเท้า","นวด คอ บ่า ไหล่","นวดอโรม่า","นวดอโรม่าทองคำ(Hot oil)","นวดโปร 999",
+        "นวดน้ำมัน / ออยรีดเส้น","สปาผมเวียดนาม","ฝังสีปาก","ฝังสีคิ้ว","สปาผมเวียดนาม+สปาหู+มาร์กหน้า",
+        "BB glow","ขัดผิว","นวดแก้อาการ","ขัดผิว+นวดอโรม่า",
         "เลือกนวดเอง หน้าร้าน🔴",
       ];
       const DURATIONS = [
@@ -877,10 +945,9 @@
           persons.push({ services: svcs, note, total });
         }
 
-        // ── Build LINE version (ชิดซ้าย, อ่านง่าย) ─────────────────────────
+        // ── Build LINE version (สำหรับร้าน) ────────────────────────────────
         const lineLines = [];
 
-        // Header — วิธีจอง
         if (currentSocial && socialId) {
           const lbl = SOCIAL_LABELS[currentSocial].badge;
           lineLines.push(`ลูกค้า ${lbl} ${socialId}`);
@@ -898,7 +965,6 @@
         lineLines.push(`เวลา : ${formatTime(time)}`);
         lineLines.push("");
 
-        // Per-person services
         persons.forEach((p, idx) => {
           const label = personCount > 1 ? `ท่านที่ ${idx + 1}` : "บริการ";
           const svcLines = p.services.map(sv => {
@@ -908,97 +974,92 @@
             return s;
           });
           lineLines.push(`${label} : ${svcLines.join(", ")}`);
-
-          // Note per person
-          if (p.note) {
-            lineLines.push(`└ หมายเหตุ : ${p.note}`);
-          }
+          if (p.note) lineLines.push(`└ หมายเหตุ : ${p.note}`);
         });
 
         lineLines.push("");
 
-        // Deposit
         if (depositStatus === "yes") {
-          lineLines.push(`☑️ ยอดมัดจำ : 500 บาท`);
+          lineLines.push(`☑️ มีมัดจำ 500 บาท`);
         } else if (depositStatus === "no") {
           lineLines.push(`❌ ไม่มีมัดจำ`);
         }
 
         const lineText = lineLines.join("\n");
 
-        // ── Build Sheet version (Tab-separated columns) ──────────────────────
-        // Columns: วันที่ | เวลา | สาขา | ชื่อ | เบอร์ | วิธีจอง | จำนวน | บริการ (ต่อท่าน) | ราคารวม | มัดจำ | หมายเหตุ
+        // ── Build CUSTOMER version ──────────────────────────────────────────
+        // สวัสดีค่ะ คุณ[ชื่อ] 😊
+        // ทางร้าน DEETWO Thai Massage ได้รับการจองเรียบร้อยแล้วค่ะ ✅
+        // ...ข้อมูลการจอง (ไม่มีวิธีจอง, ไม่มี Social)...
+        // หากต้องการเปลี่ยนแปลง กรุณาติดต่อเราก่อนถึงเวลาค่ะ 🙏
 
-        const methodStr = currentSocial && socialId
-          ? `${SOCIAL_LABELS[currentSocial].badge.replace(" :", "")} : ${socialId}`
-          : currentMethod;
+          const custLines = [];
+          custLines.push(`คุณ${name} 😊`);
+          custLines.push(`ทางร้าน DEETWO Thai Massage รับจองคิวเรียบร้อยแล้วค่ะ ✅`);
+          custLines.push(``);
+          custLines.push(`📍 สาขา : ${branch}`);
+          custLines.push(`📅 ${formatDate(date)}`);
+          custLines.push(`⏰ ${formatTime(time)}`);
+          custLines.push(`👤 ${personCount} ท่าน`);
+          custLines.push(``);
+          custLines.push(`หากต้องการเลื่อนหรือยกเลิกคิว กรุณาแจ้งล่วงหน้านะคะ 🙏`);
+          custLines.push(`ขอบคุณที่ไว้วางใจ DEETWO Thai Massage ค่ะ 💜`);
 
-        // Build service summary per person for sheet
-        const svcSummaryParts = persons.map((p, idx) => {
-          const label = personCount > 1 ? `ท่าน${idx + 1}: ` : "";
+        // บริการ
+        persons.forEach((p, idx) => {
+          const label = personCount > 1 ? `💆 บริการท่านที่ ${idx + 1}` : `💆 บริการ`;
           const svcStr = p.services.map(sv => {
             let s = sv.service;
             if (sv.duration) s += ` ${sv.duration}`;
-            if (sv.spaEar) s += `+สปาหู`;
+            if (sv.spaEar) s += ` + สปาหู`;
             return s;
-          }).join(" / ");
-          return label + svcStr;
+          }).join(", ");
+          custLines.push(`${label} : ${svcStr}`);
+          if (p.note) custLines.push(`   📝 หมายเหตุ : ${p.note}`);
         });
-        const svcSummary = svcSummaryParts.join(" | ");
 
-        const noteSummary = persons
-          .map((p, idx) => {
-            if (!p.note) return "";
-            return personCount > 1 ? `ท่าน${idx + 1}: ${p.note}` : p.note;
-          })
-          .filter(Boolean).join(", ") || "-";
+        // มัดจำ
+        if (depositStatus === "yes") {
+          custLines.push(`✅ มัดจำ : 500 บาท (ชำระแล้ว)`);
+        }
+        custLines.push(``);
+        custLines.push(`หากต้องการเปลี่ยนแปลงหรือยกเลิก`);
+        custLines.push(`กรุณาแจ้งล่วงหน้าก่อนถึงเวลาด้วยนะคะ 🙏`);
+        custLines.push(``);
+        custLines.push(`ขอบคุณที่ไว้วางใจ DEETWO Thai Massage นะคะ 💜`);
+        custLines.push(`พบกันเร็วๆ นี้ค่ะ ✨`);
 
-        const depositStr = depositStatus === "yes" ? "มัดจำ 500" : depositStatus === "no" ? "ไม่มีมัดจำ" : "-";
-
-        const sheetRow = [
-          formatDate(date),
-          formatTime(time),
-          branch,
-          `คุณ${name}`,
-          phone,
-          methodStr,
-          `${personCount} ท่าน`,
-          svcSummary,
-          depositStr,
-          noteSummary,
-        ].join("\t");
-
-        // Header row for reference
-        const sheetHeader = [
-          "วันที่","เวลา","สาขา","ชื่อจอง","เบอร์โทร","วิธีจอง","จำนวน","บริการ","มัดจำ","หมายเหตุ"
-        ].join("\t");
-
-        const sheetText = sheetHeader + "\n" + sheetRow;
+        const customerText = custLines.join("\n");
 
         // ── Store & display ──────────────────────────────────────────────────
-        generatedData = { lineText, sheetText };
+        generatedData = { lineText, customerText };
 
         document.getElementById("result-text").textContent = lineText;
+        document.getElementById("result-customer-text").textContent = customerText;
+
         const section = document.getElementById("result-section");
         section.style.display = "block";
+        // Reset to staff tab by default
+        switchTab("staff");
         resetCopyBtns();
         setTimeout(() => section.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
       }
 
-      // ── COPY FUNCTIONS ────────────────────────────────────────────────────────
-      function doFeedback(btnId, newLabel) {
+      // ── COPY FUNCTIONS ───────────────────────────────────────────────────────
+      function doFeedback(btnId, origHTML) {
         const btn = document.getElementById(btnId);
         btn.classList.add("copied");
-        const orig = btn.innerHTML;
         btn.innerHTML = "✓ คัดลอกแล้ว!";
         setTimeout(() => {
           btn.classList.remove("copied");
-          btn.innerHTML = orig;
+          btn.innerHTML = origHTML;
         }, 2500);
       }
 
       function copyToClipboard(text, btnId) {
-        navigator.clipboard.writeText(text).then(() => doFeedback(btnId)).catch(() => {
+        const btn = document.getElementById(btnId);
+        const origHTML = btn.innerHTML;
+        navigator.clipboard.writeText(text).then(() => doFeedback(btnId, origHTML)).catch(() => {
           const el = document.createElement("textarea");
           el.value = text;
           el.style.cssText = "position:fixed;opacity:0";
@@ -1006,16 +1067,16 @@
           el.select();
           document.execCommand("copy");
           document.body.removeChild(el);
-          doFeedback(btnId);
+          doFeedback(btnId, origHTML);
         });
       }
 
-      function copySheet() { copyToClipboard(generatedData.sheetText, "copy-sheet-btn"); }
-      function copyLine()  { copyToClipboard(generatedData.lineText,  "copy-line-btn"); }
+      function copyLine()     { copyToClipboard(generatedData.lineText,     "copy-line-btn"); }
+      function copyCustomer() { copyToClipboard(generatedData.customerText, "copy-customer-btn"); }
 
       function resetCopyBtns() {
-        document.getElementById("copy-sheet-btn").classList.remove("copied");
         document.getElementById("copy-line-btn").classList.remove("copied");
+        document.getElementById("copy-customer-btn").classList.remove("copied");
       }
 
       function clearForm() {
